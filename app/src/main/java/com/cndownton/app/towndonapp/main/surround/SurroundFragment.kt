@@ -7,8 +7,10 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
 
 import com.cndownton.app.towndonapp.R
+import org.jetbrains.anko.find
 
 /**
  * A simple [Fragment] subclass.
@@ -26,6 +28,8 @@ class SurroundFragment : Fragment() {
 
     private var mListener: OnFragmentInteractionListener? = null
 
+    private lateinit var mWebView: WebView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
@@ -36,8 +40,10 @@ class SurroundFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater!!.inflate(R.layout.fragment_surround, container, false)
+        val view=inflater!!.inflate(R.layout.fragment_surround, container, false)
+        mWebView=view.find(R.id.wv_surround)
+        mWebView.loadUrl("http://www.cndownton.com/shop_list_new.html")
+        return view
     }
 
     // TODO: Rename method, update argument and hook method into UI event
