@@ -4,7 +4,7 @@
               android:layout_height="match_parent"
               android:background="#cecece"
               android:orientation="vertical"
-              tools:context="com.cndownton.app.towndonapp.main.me.MeFragment">
+              tools:context="com.cndownton.app.downton.main.me.MeFragment">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
