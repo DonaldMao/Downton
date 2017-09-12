@@ -13,8 +13,8 @@ import com.cndownton.app.downton.R
 /**
  * A simple [Fragment] subclass.
  */
-class SettingFragment : Fragment() {
-
+class SettingFragment : Fragment(),SettingContract.View {
+    override lateinit var presenter: SettingContract.Presenter
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

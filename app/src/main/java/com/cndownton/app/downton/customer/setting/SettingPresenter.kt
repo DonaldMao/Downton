@@ -5,6 +5,6 @@ package com.cndownton.app.downton.customer.setting
  */
 class SettingPresenter:SettingContract.Presenter {
     override fun start() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 }

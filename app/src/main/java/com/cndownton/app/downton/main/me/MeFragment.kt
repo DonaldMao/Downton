@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.ViewSwitcher
 
 import com.cndownton.app.downton.R
 import com.cndownton.app.downton.customer.setting.SettingActivity
@@ -60,6 +61,7 @@ class MeFragment : Fragment() {
     private lateinit var ll_invite:LinearLayout
     private lateinit var ll_zone:LinearLayout
 
+    private lateinit var vs_content:ViewSwitcher
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
@@ -70,7 +72,7 @@ class MeFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-            rootView = inflater!!.inflate(R.layout.fragment_me, container, false)
+        rootView = inflater!!.inflate(R.layout.fragment_me, container, false)
         mBadgeviewContainer = rootView!!.find(R.id.badgeview_container)
         QBadgeView(activity).bindTarget(mBadgeviewContainer).setBadgeNumber(6)
                 .setBadgeGravity(Gravity.CENTER or  Gravity.END)
@@ -120,6 +122,9 @@ class MeFragment : Fragment() {
         ll_friend.setOnClickListener{toast("好友")}
         ll_invite.setOnClickListener{toast("邀请")}
         ll_zone.setOnClickListener{toast("地区")}
+
+        vs_content= rootView!!.find(R.id.vs_content)
+        vs_content.showNext()
 
         return rootView
     }
