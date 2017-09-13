@@ -4,13 +4,12 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.webkit.WebView
+import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
+import android.view.*
 
-import com.cndownton.app.downton.R
-import org.jetbrains.anko.find
+import com.cndownton.app.R
 
 /**
  * A simple [Fragment] subclass.
@@ -28,7 +27,10 @@ class CommunityFragment : Fragment() {
 
     private var mListener: OnFragmentInteractionListener? = null
 
-    private lateinit var mWebView:WebView
+    private lateinit var toolbar:Toolbar
+    private lateinit var sl_community:SwipeRefreshLayout
+
+    private var mActivity: AppCompatActivity? =null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
@@ -41,12 +43,17 @@ class CommunityFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view=inflater!!.inflate(R.layout.fragment_community, container, false)
-        mWebView=view.find(R.id.wv_community)
-        val webSetting=mWebView.settings
-        webSetting.javaScriptEnabled=true
-        webSetting.javaScriptCanOpenWindowsAutomatically=true
-        mWebView.loadUrl("http://www.cndownton.com/community/64.html")
+        toolbar=view.findViewById(R.id.toolbar)
+        toolbar.title=""
+        mActivity= activity as AppCompatActivity?
+        mActivity?.setSupportActionBar(toolbar)
+        setHasOptionsMenu(true)
         return view
+    }
+
+     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        menu?.clear()
+         inflater?.inflate(R.menu.community_toolbar,menu)
     }
 
     // TODO: Rename method, update argument and hook method into UI event

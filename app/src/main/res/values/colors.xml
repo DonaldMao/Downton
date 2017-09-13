@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#3c3f42</color>
+    <color name="colorPrimaryDark">#2c2f32</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="dark_primary_text_0.87">#de000000</color>
+    <color name="dark_second_text_0.54">#8a000000</color>
+    <color name="dark_disabled_hint_text_0.38">#61000000</color>
+
+    <color name="white_primary_text_1.0">#ffffffff</color>
+    <color name="white_second_text_0.7">#b3ffffff</color>
+    <color name="white_disabled_hint_text_0.5">#80ffffff</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="white">#ffffffff</color>
+    <color name="white_gray">#ffc0c0c0</color>
+    <color name="black">#ff000000</color>
+    <color name="black6e">#eeeeee</color>
+    <color name="red">#ffef5a50</color>
+    <color name="red_deep">#ffcc0000</color>
+    <color name="btn_gray_normal">#ffa3a3a3</color>
+    <color name="btn_gray_pressed">#ff999999</color>
+    <color name="blue">#0000ff</color>
+    <color name="light_blue">#a5d2f1</color>
+    <color name="clear">#00000000</color>
+    <color name="back_gray">#f7f5fb</color>
+    <color name="page_bg_normal">#ccf1f1f1</color>
 </resources>

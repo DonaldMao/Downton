@@ -6,12 +6,14 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.widget.ImageView
-import com.cndownton.app.downton.R
+import com.cndownton.app.R
 import com.cndownton.app.downton.main.community.CommunityFragment
 import com.cndownton.app.downton.main.home.HomeFragment
 import com.cndownton.app.downton.main.mall.MallFragment
 import com.cndownton.app.downton.main.me.MeFragment
 import com.cndownton.app.downton.main.surround.SurroundFragment
+import com.tencent.mm.opensdk.openapi.IWXAPI
+import com.tencent.mm.opensdk.openapi.WXAPIFactory
 
 class MainActivity : AppCompatActivity() {
     private lateinit var iv_home_tab: ImageView
@@ -23,9 +25,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var vp_main: ViewPager
     private val mFragments: ArrayList<Fragment> = ArrayList()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         iv_home_tab = findViewById(R.id.iv_home_tab)
         vp_main = findViewById(R.id.vp_home)
 
@@ -135,6 +139,8 @@ class MainActivity : AppCompatActivity() {
         })
 
     }
+
+
 
     private fun unSelect(iv_selected: ImageView?) {
         when (iv_selected) {

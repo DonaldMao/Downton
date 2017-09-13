@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TownDonAPP.iml" filepath="$PROJECT_DIR$/TownDonAPP.iml" />
-      <module fileurl="file://D:\Android\projects\3\TownDonAPP\TowntonApp.iml" filepath="D:\Android\projects\3\TownDonAPP\TowntonApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Downton.iml" filepath="$PROJECT_DIR$/Downton.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

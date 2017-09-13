@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 
-import com.cndownton.app.downton.R
+import com.cndownton.app.R
 import org.jetbrains.anko.find
 
 /**

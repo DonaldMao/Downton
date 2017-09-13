@@ -9,15 +9,12 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.ViewSwitcher
-
-import com.cndownton.app.downton.R
+import android.widget.*
+import com.cndownton.app.R
+import com.cndownton.app.downton.MyApplication
 import com.cndownton.app.downton.customer.setting.SettingActivity
+import com.tencent.mm.opensdk.modelmsg.SendAuth
 import org.jetbrains.anko.find
-import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 import q.rorbin.badgeview.QBadgeView
 
@@ -62,6 +59,8 @@ class MeFragment : Fragment() {
     private lateinit var ll_zone:LinearLayout
 
     private lateinit var vs_content:ViewSwitcher
+
+    private lateinit var bt_login:Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
@@ -102,6 +101,15 @@ class MeFragment : Fragment() {
         ll_invite=rootView!!.find(R.id.ll_invite)
         ll_zone=rootView!!.find(R.id.ll_zone)
 
+        bt_login= rootView!!.find(R.id.email_sign_in_button)
+
+        vs_content= rootView!!.find(R.id.vs_content)
+        vs_content.showNext()
+
+        return rootView
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         ib_message_toolbar.setOnClickListener{toast("消息")}
         ib_avatar.setOnClickListener { toast("头像设置")  }
         ib_setting.setOnClickListener { startActivity(Intent(activity,SettingActivity::class.java))}
@@ -123,10 +131,7 @@ class MeFragment : Fragment() {
         ll_invite.setOnClickListener{toast("邀请")}
         ll_zone.setOnClickListener{toast("地区")}
 
-        vs_content= rootView!!.find(R.id.vs_content)
-        vs_content.showNext()
-
-        return rootView
+        bt_login.setOnClickListener{wxLogin()}
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -150,6 +155,16 @@ class MeFragment : Fragment() {
         mListener = null
     }
 
+    fun wxLogin(){
+        if (!MyApplication.api.isWXAppInstalled){
+            toast("微信没有安装")
+            return
+        }
+        val req:SendAuth.Req=SendAuth.Req()
+        req.scope="snsapi_userinfo"
+        req.state="diandi_wx_login"
+        MyApplication.api.sendReq(req)
+    }
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated

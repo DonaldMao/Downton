@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.view.Menu
 import android.view.MenuItem
-import com.cndownton.app.downton.R
+import com.cndownton.app.R
 import com.cndownton.app.downton.util.setupActionBar
 import org.jetbrains.anko.find
 import org.jetbrains.anko.toast
@@ -30,7 +30,7 @@ class SettingActivity : AppCompatActivity() {
         }
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.setting_toobar,menu)
+        menuInflater.inflate(R.menu.setting_toolbar,menu)
         return true
     }
 

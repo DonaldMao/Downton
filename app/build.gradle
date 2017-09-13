@@ -15,11 +15,31 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    //签名配置
+    signingConfigs {
+        debugConfig {
+            keyAlias "downton"
+            keyPassword "123456"
+            storeFile file("C:/Users/Administrator/key/downton.jks")
+            storePassword "123456"
+        }
+        releaseConfig {
+            keyAlias "demodemo"
+            keyPassword "demodemo"
+            storeFile file("G:/AndroidStudioWorkSpace/Test/demo.keystore")
+            storePassword "demodemo"
+        }
+    }
     buildTypes {
+        debug{
+            signingConfig signingConfigs.debugConfig
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
     }
 }
 repositories {
@@ -46,6 +66,8 @@ dependencies {
     compile "org.jetbrains.anko:anko-appcompat-v7-coroutines:$anko_version"
     // Anko SQLite
     compile "org.jetbrains.anko:anko-sqlite:$anko_version"
+    // weixin
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
