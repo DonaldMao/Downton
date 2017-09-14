@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
@@ -29,6 +31,7 @@ android {
             storeFile file("G:/AndroidStudioWorkSpace/Test/demo.keystore")
             storePassword "demodemo"
         }
+
     }
     buildTypes {
         debug{
@@ -40,6 +43,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
+    }
+    kapt {
+        generateStubs = true
     }
 }
 repositories {
@@ -72,4 +78,11 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.android.support:design:26.0.2'
+
+    compile("com.github.hotchemi:permissionsdispatcher:$permission_version") {
+        // if you don't use android.app.Fragment you can exclude support for them
+        exclude module: "support-v13"
+    }
+
+    kapt 'com.github.hotchemi:permissionsdispatcher-processor:2.4.0'
 }
