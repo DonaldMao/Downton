@@ -3,6 +3,7 @@ package com.cndownton.app.downton
 import android.app.Application
 import com.tencent.mm.opensdk.openapi.IWXAPI
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
+import permissions.dispatcher.RuntimePermissions
 
 /**
  * Created by Administrator_mpf on 2017/9/13.

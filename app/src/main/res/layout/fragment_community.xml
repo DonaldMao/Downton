@@ -9,14 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <android.support.v7.widget.Toolbar
-            android:id="@id/toolbar"
+            android:id="@+id/toolbar_community"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             app:titleTextColor="@android:color/white"
             android:background="@color/colorPrimary"
             app:popupTheme="@style/ToolbarPopupTheme">
             <TextView
-                android:id="@id/title_toolbar"
+                android:id="@+id/title_toolbar_community"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -28,12 +28,11 @@
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/sl_community"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         >
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </android.support.constraint.ConstraintLayout>
 </LinearLayout>

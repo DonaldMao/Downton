@@ -4,6 +4,8 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +30,8 @@ class HomeFragment : Fragment() {
 
     private var mListener: OnFragmentInteractionListener? = null
 
+    private lateinit var toolbar: Toolbar
+    private var mActivity: AppCompatActivity? =null
     private var wv_home:WebView?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +47,11 @@ class HomeFragment : Fragment() {
         val view=inflater!!.inflate(R.layout.fragment_home, container, false)
         wv_home= view.find<WebView>(R.id.wv_home)
         (wv_home as WebView).loadUrl("http://www.cndownton.com/index.html")
+        toolbar=view.find(R.id.toolbar_home)
+        toolbar.title=""
+        mActivity= activity as AppCompatActivity?
+        mActivity?.setSupportActionBar(toolbar)
+        setHasOptionsMenu(true)
         return view
     }
 

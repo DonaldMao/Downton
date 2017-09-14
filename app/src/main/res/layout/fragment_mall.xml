@@ -1,20 +1,43 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.cndownton.app.downton.main.mall.MallFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              tools:context="com.cndownton.app.downton.main.mall.MallFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <ScrollView
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <ImageView
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_mall"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/mall_stub"
-            android:scaleType="centerInside"
-            />
-    </ScrollView>
+            android:layout_height="48dp"
+            app:titleTextColor="@android:color/white"
+            android:background="@color/colorPrimary"
+            app:popupTheme="@style/ToolbarPopupTheme">
+            <TextView
+                android:id="@+id/title_toolbar_mall"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="商城"
+                android:textSize="24sp"
+                android:textColor="@color/white_primary_text_1.0"
+                />
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--<ImageView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@drawable/mall_stub"-->
+            <!--android:scaleType="centerInside"-->
+            <!--/>-->
+    <!--</ScrollView>-->
 
 
-</FrameLayout>
+</LinearLayout>

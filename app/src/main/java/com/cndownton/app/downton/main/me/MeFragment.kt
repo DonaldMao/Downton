@@ -61,6 +61,7 @@ class MeFragment : Fragment() {
     private lateinit var vs_content:ViewSwitcher
 
     private lateinit var bt_login:Button
+    private lateinit var weixin_login:ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
@@ -102,7 +103,7 @@ class MeFragment : Fragment() {
         ll_zone=rootView!!.find(R.id.ll_zone)
 
         bt_login= rootView!!.find(R.id.email_sign_in_button)
-
+        weixin_login= rootView!!.find(R.id.weixin_login)
         vs_content= rootView!!.find(R.id.vs_content)
         vs_content.showNext()
 
@@ -131,8 +132,8 @@ class MeFragment : Fragment() {
         ll_invite.setOnClickListener{toast("邀请")}
         ll_zone.setOnClickListener{toast("地区")}
 
-        bt_login.setOnClickListener{wxLogin()}
-    }
+        bt_login.setOnClickListener{}
+        weixin_login.setOnClickListener{wxLogin()}}
 
     // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {
@@ -162,7 +163,7 @@ class MeFragment : Fragment() {
         }
         val req:SendAuth.Req=SendAuth.Req()
         req.scope="snsapi_userinfo"
-        req.state="diandi_wx_login"
+        req.state="towndon_wx_login"
         MyApplication.api.sendReq(req)
     }
     /**

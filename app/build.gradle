@@ -19,23 +19,23 @@ android {
     }
     //签名配置
     signingConfigs {
-        debugConfig {
-            keyAlias "downton"
-            keyPassword "123456"
-            storeFile file("C:/Users/Administrator/key/downton.jks")
-            storePassword "123456"
-        }
-        releaseConfig {
-            keyAlias "demodemo"
-            keyPassword "demodemo"
-            storeFile file("G:/AndroidStudioWorkSpace/Test/demo.keystore")
-            storePassword "demodemo"
-        }
+//        debugConfig {
+//            keyAlias "downton"
+//            keyPassword "123456"
+//            storeFile file("C:/Users/Administrator/key/downton.jks")
+//            storePassword "123456"
+//        }
+//        releaseConfig {
+//            keyAlias "demodemo"
+//            keyPassword "demodemo"
+//            storeFile file("G:/AndroidStudioWorkSpace/Test/demo.keystore")
+//            storePassword "demodemo"
+//        }
 
     }
     buildTypes {
         debug{
-            signingConfig signingConfigs.debugConfig
+//            signingConfig signingConfigs.debugConfig
         }
 
         release {

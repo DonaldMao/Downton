@@ -4,11 +4,14 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 import com.cndownton.app.R
+import org.jetbrains.anko.find
 
 /**
  * A simple [Fragment] subclass.
@@ -26,6 +29,8 @@ class MallFragment : Fragment() {
 
     private var mListener: OnFragmentInteractionListener? = null
 
+    private lateinit var toolbar: Toolbar
+    private var mActivity: AppCompatActivity? =null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
@@ -37,7 +42,13 @@ class MallFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater!!.inflate(R.layout.fragment_mall, container, false)
+        val rootView=inflater!!.inflate(R.layout.fragment_mall, container, false)
+        toolbar=rootView.find(R.id.toolbar_mall)
+        toolbar.title=""
+        mActivity= activity as AppCompatActivity?
+        mActivity?.setSupportActionBar(toolbar)
+        setHasOptionsMenu(true)
+        return  rootView
     }
 
     // TODO: Rename method, update argument and hook method into UI event

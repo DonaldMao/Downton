@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog
 import android.widget.ImageView
 import android.widget.Toast
 import com.cndownton.app.R
+import com.cndownton.app.downton.compatview.CompatViewPager
 import com.cndownton.app.downton.main.community.CommunityFragment
 import com.cndownton.app.downton.main.home.HomeFragment
 import com.cndownton.app.downton.main.mall.MallFragment
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var iv_surround_tab: ImageView
     private lateinit var iv_me_tab: ImageView
     private lateinit var iv_selected: ImageView
-    private lateinit var vp_main: ViewPager
+    private lateinit var vp_main: CompatViewPager
     private val mFragments: ArrayList<Fragment> = ArrayList()
 
 
