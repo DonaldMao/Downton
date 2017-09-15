@@ -12,9 +12,11 @@ import android.view.ViewGroup
 import android.widget.*
 import com.cndownton.app.R
 import com.cndownton.app.downton.MyApplication
+import com.cndownton.app.downton.customer.message.MessageActivity
 import com.cndownton.app.downton.customer.setting.SettingActivity
 import com.tencent.mm.opensdk.modelmsg.SendAuth
 import org.jetbrains.anko.find
+import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 import q.rorbin.badgeview.QBadgeView
 
@@ -111,7 +113,7 @@ class MeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        ib_message_toolbar.setOnClickListener{toast("消息")}
+        ib_message_toolbar.setOnClickListener{startActivity(Intent(activity,MessageActivity::class.java))}
         ib_avatar.setOnClickListener { toast("头像设置")  }
         ib_setting.setOnClickListener { startActivity(Intent(activity,SettingActivity::class.java))}
         tv_focus.setOnClickListener{toast("关注")}
