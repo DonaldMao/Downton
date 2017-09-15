@@ -19,30 +19,28 @@ android {
     }
     //签名配置
     signingConfigs {
-//        debugConfig {
-//            keyAlias "downton"
-//            keyPassword "123456"
-//            storeFile file("C:/Users/Administrator/key/downton.jks")
-//            storePassword "123456"
-//        }
-//        releaseConfig {
-//            keyAlias "demodemo"
-//            keyPassword "demodemo"
-//            storeFile file("G:/AndroidStudioWorkSpace/Test/demo.keystore")
-//            storePassword "demodemo"
-//        }
+        debugConfig {
+            keyAlias "downton"
+            keyPassword "123456"
+            storeFile file("C:/Users/Administrator/key/downton.jks")
+            storePassword "123456"
+        }
+        releaseConfig {
+            keyAlias "demodemo"
+            keyPassword "demodemo"
+            storeFile file("G:/AndroidStudioWorkSpace/Test/demo.keystore")
+            storePassword "demodemo"
+        }
 
     }
     buildTypes {
         debug{
-//            signingConfig signingConfigs.debugConfig
+            signingConfig signingConfigs.debugConfig
         }
-
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-
     }
     kapt {
         generateStubs = true
@@ -59,6 +57,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:26.0.2'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.github.hackware1993:MagicIndicator:1.5.0'
     compile 'q.rorbin:badgeview:1.1.2'
     // Anko Commons
     implementation 'com.android.support:support-v4:26.0.2'

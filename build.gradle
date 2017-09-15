@@ -23,6 +23,7 @@ allprojects {
         google()
         jcenter()
         maven {url 'https://dl.bintray.com/jetbrains/anko'}
+        maven {url "https://jitpack.io" }
     }
 }
 

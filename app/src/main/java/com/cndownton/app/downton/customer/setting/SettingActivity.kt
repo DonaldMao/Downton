@@ -16,7 +16,7 @@ class SettingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
-        setupActionBar(R.id.toolbar) {
+        setupActionBar(R.id.toolbar_setting) {
             setTitle("我的资料")
            setHomeAsUpIndicator(R.drawable.setting_backarrow)
             setDisplayHomeAsUpEnabled(true)
