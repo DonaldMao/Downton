@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AlertDialog
+import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import com.cndownton.app.R
@@ -37,7 +38,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         MainActivityPermissionsDispatcher.getPermissionsWithCheck(this)
-
         iv_home_tab = findViewById(R.id.iv_home_tab)
         vp_main = findViewById(R.id.vp_home)
 

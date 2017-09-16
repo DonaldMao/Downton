@@ -13,6 +13,7 @@ import android.widget.*
 import com.cndownton.app.R
 import com.cndownton.app.downton.MyApplication
 import com.cndownton.app.downton.customer.message.MessageActivity
+import com.cndownton.app.downton.customer.mobile.MobileActivity
 import com.cndownton.app.downton.customer.setting.SettingActivity
 import com.tencent.mm.opensdk.modelmsg.SendAuth
 import org.jetbrains.anko.find
@@ -41,6 +42,7 @@ class MeFragment : Fragment() {
 
     private lateinit var ib_message_toolbar: ImageButton
     private lateinit var ib_setting:ImageButton
+    private lateinit var ib_mobile:ImageButton
     private lateinit var ib_avatar:ImageButton
     private lateinit var tv_focus:TextView
     private lateinit var tv_fans:TextView
@@ -85,6 +87,7 @@ class MeFragment : Fragment() {
                 .setBadgeTextSize(5f,true)
                 .setBadgeGravity(Gravity.CENTER )
         ib_setting=rootView!!.find(R.id.ib_setting)
+        ib_mobile= rootView!!.find(R.id.ib_mobile)
         ib_avatar=rootView!!.find(R.id.ib_avatar)
         tv_focus=rootView!!.find(R.id.tv_focus)
         tv_fans=rootView!!.find(R.id.tv_fans)
@@ -116,6 +119,7 @@ class MeFragment : Fragment() {
         ib_message_toolbar.setOnClickListener{startActivity(Intent(activity,MessageActivity::class.java))}
         ib_avatar.setOnClickListener { toast("头像设置")  }
         ib_setting.setOnClickListener { startActivity(Intent(activity,SettingActivity::class.java))}
+        ib_mobile.setOnClickListener{startActivity(Intent(activity,MobileActivity::class.java))}
         tv_focus.setOnClickListener{toast("关注")}
         tv_fans.setOnClickListener{toast("粉丝")}
         tv_favorite.setOnClickListener { toast("收集") }

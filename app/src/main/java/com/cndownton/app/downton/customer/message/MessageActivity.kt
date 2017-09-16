@@ -62,7 +62,7 @@ class MessageActivity : AppCompatActivity() {
             override fun getTitleView(p0: Context?, p1: Int): IPagerTitleView {
                 val colorTransitionPagerTitleView = ColorTransitionPagerTitleView(p0)
                 colorTransitionPagerTitleView.normalColor = Color.GRAY
-                colorTransitionPagerTitleView.selectedColor = Color.BLACK
+                colorTransitionPagerTitleView.selectedColor = resources.getColor(R.color.red)
                 colorTransitionPagerTitleView.text = titles[p1]
                 colorTransitionPagerTitleView.setOnClickListener{
                     mViewPager.currentItem = p1
@@ -76,8 +76,9 @@ class MessageActivity : AppCompatActivity() {
 
             override fun getIndicator(p0: Context?): IPagerIndicator {
                 val indicator = LinePagerIndicator(p0)
-                indicator.mode = LinePagerIndicator.MODE_WRAP_CONTENT;
-                return indicator;
+                indicator.mode = LinePagerIndicator.MODE_WRAP_CONTENT
+                indicator.setColors(resources.getColor(R.color.red))
+                return indicator
             }
 
         }
