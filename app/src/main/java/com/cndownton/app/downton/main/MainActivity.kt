@@ -1,24 +1,21 @@
 package com.cndownton.app.downton.main
 
 import android.Manifest
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AlertDialog
-import android.util.Log
+import android.support.v7.app.AppCompatActivity
 import android.widget.ImageView
 import android.widget.Toast
 import com.cndownton.app.R
-import com.cndownton.app.downton.compatview.CompatViewPager
 import com.cndownton.app.downton.main.community.CommunityFragment
 import com.cndownton.app.downton.main.home.HomeFragment
 import com.cndownton.app.downton.main.mall.MallFragment
 import com.cndownton.app.downton.main.me.MeFragment
 import com.cndownton.app.downton.main.surround.SurroundFragment
-import com.tencent.mm.opensdk.openapi.IWXAPI
-import com.tencent.mm.opensdk.openapi.WXAPIFactory
+import ezy.boost.update.UpdateManager
 import permissions.dispatcher.*
 
 @RuntimePermissions()
@@ -29,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var iv_surround_tab: ImageView
     private lateinit var iv_me_tab: ImageView
     private lateinit var iv_selected: ImageView
-    private lateinit var vp_main: CompatViewPager
+    private lateinit var vp_main: ViewPager
     private val mFragments: ArrayList<Fragment> = ArrayList()
 
 
@@ -193,6 +190,12 @@ class MainActivity : AppCompatActivity() {
                 .setCancelable(false)
                 .setMessage(string)
                 .show()
+    }
+
+    private fun updateApp(){
+        UpdateManager.setUrl("","main")
+        UpdateManager.setDebuggable(true)
+        UpdateManager.check(this)
     }
 }
 

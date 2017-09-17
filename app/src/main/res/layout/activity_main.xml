@@ -8,7 +8,7 @@
     tools:context="com.cndownton.app.downton.main.MainActivity"
     android:orientation="vertical">
 
-    <com.cndownton.app.downton.compatview.CompatViewPager
+    <android.support.v4.view.ViewPager
         android:id="@+id/vp_home"
         android:layout_width="match_parent"
         android:layout_height="0dp"

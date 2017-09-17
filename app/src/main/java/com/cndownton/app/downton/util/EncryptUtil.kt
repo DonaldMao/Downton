@@ -11,8 +11,8 @@ import kotlin.experimental.and
  */
 class EncryptUtil {
     fun shaEncrypt(strSrc: String): String? {
-        var md: MessageDigest? = null
-        var strDes: String? = null
+        val md: MessageDigest?
+        val strDes: String?
         val bt = strSrc.toByteArray()
         try {
             md = MessageDigest.getInstance("SHA-256")// 将此换成SHA-1、SHA-512、SHA-384等参数
@@ -27,7 +27,7 @@ class EncryptUtil {
 
     private fun bytes2Hex(bts: ByteArray): String {
         var des = ""
-        var tmp: String? = null
+        var tmp: String?
         for (i in bts.indices) {
             tmp = Integer.toHexString(((bts[i] and 0xFF.toByte()).toInt()))
             if (tmp!!.length == 1) {
