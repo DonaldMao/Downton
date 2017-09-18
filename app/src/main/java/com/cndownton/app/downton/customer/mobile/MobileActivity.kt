@@ -21,6 +21,7 @@ import org.jetbrains.anko.find
 
 import java.lang.Exception
 
+@Suppress("DEPRECATION")
 class MobileActivity : AppCompatActivity() {
     private lateinit var bt_send_cod:Button
     private lateinit var bt_confirm:Button
@@ -40,7 +41,6 @@ class MobileActivity : AppCompatActivity() {
         initComponent()
     }
 
-    @Suppress("DEPRECATION")
     private fun initComponent() {
         bt_send_cod=find(R.id.bt_sendcode)
         bt_send_cod.setOnClickListener {

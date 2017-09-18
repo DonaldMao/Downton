@@ -29,12 +29,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var vp_main: ViewPager
     private val mFragments: ArrayList<Fragment> = ArrayList()
 
-
+    private val mCheckUrl = "http://192.168.1.99/update.php"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         MainActivityPermissionsDispatcher.getPermissionsWithCheck(this)
+        checkUpdate()
         iv_home_tab = findViewById(R.id.iv_home_tab)
         vp_main = findViewById(R.id.vp_home)
 
@@ -192,9 +193,10 @@ class MainActivity : AppCompatActivity() {
                 .show()
     }
 
-    private fun updateApp(){
-        UpdateManager.setUrl("","main")
+    private fun checkUpdate(){
         UpdateManager.setDebuggable(true)
+        UpdateManager.setWifiOnly(false)
+        UpdateManager.setUrl(mCheckUrl, "main")
         UpdateManager.check(this)
     }
 }

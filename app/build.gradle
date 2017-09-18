@@ -17,25 +17,25 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    //签名配置
-//    signingConfigs {
-//        debugConfig {
-//            keyAlias "downton"
-//            keyPassword "123456"
-//            storeFile file("C:/Users/Administrator/key/downton.jks")
-//            storePassword "123456"
-//        }
-//        releaseConfig {
-//            keyAlias "downton"
-//            keyPassword "123456"
-//            storeFile file("C:/Users/Administrator/key/downton.jks")
-//            storePassword "123456"
-//        }
-//
-//    }
+//    签名配置
+    signingConfigs {
+        debugConfig {
+            keyAlias "downton"
+            keyPassword "123456"
+            storeFile file("C:/Users/Administrator/key/downton.jks")
+            storePassword "123456"
+        }
+        releaseConfig {
+            keyAlias "downton"
+            keyPassword "123456"
+            storeFile file("C:/Users/Administrator/key/downton.jks")
+            storePassword "123456"
+        }
+
+    }
     buildTypes {
         debug {
-//            signingConfig signingConfigs.debugConfig
+            signingConfig signingConfigs.debugConfig
         }
         release {
             minifyEnabled false
