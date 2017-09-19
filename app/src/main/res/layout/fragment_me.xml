@@ -10,7 +10,8 @@
               tools:context="com.cndownton.app.downton.main.me.MeFragment">
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -688,19 +689,47 @@
         android:layout_height="match_parent"
         android:background="@android:color/white"
         >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            android:background="@color/colorPrimary"
+            android:id="@+id/toolbar_login"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="登录"
+                android:layout_gravity="center"
+                android:textSize="24sp"
+                android:textColor="@color/white"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/tv_login"/>
+            <ImageButton
+                android:layout_width="24dp"
+                android:layout_height="32dp"
+                android:visibility="gone"
+                android:src="@drawable/user_center_message"
+                android:background="@android:color/transparent"
+                android:layout_marginEnd="20dp"
+                android:scaleType="fitXY"
+                android:layout_alignTop="@id/tv_login"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:src="@drawable/dt_logo"
-            android:scaleType="center"
-            android:layout_height="200dp"
+            android:layout_height="160dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/dt_logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_login"/>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/textInputLayout"
@@ -708,7 +737,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="-8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -718,7 +747,7 @@
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="请输入手机号或者邮箱"
+                android:hint="请输入用户名"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:singleLine="true"/>
@@ -757,8 +786,11 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:text="登陆"
-            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:text="登  录"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_button_confirm"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"/>

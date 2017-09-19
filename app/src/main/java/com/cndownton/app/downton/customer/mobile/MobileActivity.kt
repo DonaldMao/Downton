@@ -33,7 +33,7 @@ class MobileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mobile)
-        setupActionBar(R.id.toolbar_setting) {
+        setupActionBar(R.id.toolbar_mobile) {
             setTitle("绑定手机号码")
             setHomeAsUpIndicator(R.drawable.setting_backarrow)
             setDisplayHomeAsUpEnabled(true)

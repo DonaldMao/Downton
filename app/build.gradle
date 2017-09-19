@@ -22,13 +22,13 @@ android {
         debugConfig {
             keyAlias "downton"
             keyPassword "123456"
-            storeFile file("C:/Users/Administrator/key/downton.jks")
+            storeFile file("D:/key/downton.jks")
             storePassword "123456"
         }
         releaseConfig {
             keyAlias "downton"
             keyPassword "123456"
-            storeFile file("C:/Users/Administrator/key/downton.jks")
+            storeFile file("D:/key/downton.jks")
             storePassword "123456"
         }
 

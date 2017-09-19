@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         MainActivityPermissionsDispatcher.getPermissionsWithCheck(this)
-        checkUpdate()
+//        checkUpdate()
         iv_home_tab = findViewById(R.id.iv_home_tab)
         vp_main = findViewById(R.id.vp_home)
 
@@ -51,16 +51,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        iv_mall_tab = findViewById(R.id.iv_mall_tab)
-        iv_mall_tab.setOnClickListener {
-            if (iv_selected != iv_mall_tab) {
-                unSelect(iv_selected)
-                iv_selected = iv_mall_tab
-                iv_mall_tab.setImageResource(R.drawable.mall_selected)
-                vp_main.setCurrentItem(1, false)
-            }
-
-        }
+//        iv_mall_tab = findViewById(R.id.iv_mall_tab)
+//        iv_mall_tab.setOnClickListener {
+//            if (iv_selected != iv_mall_tab) {
+//                unSelect(iv_selected)
+//                iv_selected = iv_mall_tab
+//                iv_mall_tab.setImageResource(R.drawable.mall_selected)
+//                vp_main.setCurrentItem(1, false)
+//            }
+//
+//        }
 
         iv_community_tab = findViewById(R.id.iv_community_tab)
         iv_community_tab.setOnClickListener {
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                 unSelect(iv_selected)
                 iv_selected = iv_community_tab
                 iv_community_tab.setImageResource(R.drawable.community_selected)
-                vp_main.setCurrentItem(2, false)
+                vp_main.setCurrentItem(1, false)
             }
         }
         iv_surround_tab = findViewById(R.id.iv_surround_tab)
@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
                 unSelect(iv_selected)
                 iv_selected = iv_surround_tab
                 iv_surround_tab.setImageResource(R.drawable.surround_selected)
-                vp_main.setCurrentItem(3, false)
+                vp_main.setCurrentItem(2, false)
             }
         }
         iv_me_tab = findViewById(R.id.iv_me_tab)
@@ -86,12 +86,12 @@ class MainActivity : AppCompatActivity() {
                 unSelect(iv_selected)
                 iv_selected = iv_me_tab
                 iv_me_tab.setImageResource(R.drawable.me_selected)
-                vp_main.setCurrentItem(4, false)
+                vp_main.setCurrentItem(3, false)
             }
         }
 
         mFragments.add(HomeFragment())
-        mFragments.add(MallFragment())
+//        mFragments.add(MallFragment())
         mFragments.add(CommunityFragment())
         mFragments.add(SurroundFragment())
         mFragments.add(MeFragment())
@@ -123,20 +123,20 @@ class MainActivity : AppCompatActivity() {
                         iv_home_tab.setImageResource(R.drawable.home_selected)
                         iv_selected = iv_home_tab
                     }
-                    1 -> {
-                        iv_mall_tab.setImageResource(R.drawable.mall_selected)
-                        iv_selected = iv_mall_tab
-                    }
+//                    1 -> {
+//                        iv_mall_tab.setImageResource(R.drawable.mall_selected)
+//                        iv_selected = iv_mall_tab
+//                    }
 
-                    2 -> {
+                    1 -> {
                         iv_community_tab.setImageResource(R.drawable.community_selected)
                         iv_selected = iv_community_tab
                     }
-                    3 -> {
+                    2 -> {
                         iv_surround_tab.setImageResource(R.drawable.surround_selected)
                         iv_selected = iv_surround_tab
                     }
-                    4 -> {
+                    3 -> {
                         iv_me_tab.setImageResource(R.drawable.me_selected)
                         iv_selected = iv_me_tab
                     }
@@ -153,7 +153,7 @@ class MainActivity : AppCompatActivity() {
     private fun unSelect(iv_selected: ImageView?) {
         when (iv_selected) {
             iv_home_tab -> iv_selected.setImageResource(R.drawable.home)
-            iv_mall_tab -> iv_selected.setImageResource(R.drawable.mall)
+//            iv_mall_tab -> iv_selected.setImageResource(R.drawable.mall)
             iv_community_tab -> iv_selected.setImageResource(R.drawable.community)
             iv_surround_tab -> iv_selected.setImageResource(R.drawable.surround)
             iv_me_tab -> iv_selected.setImageResource(R.drawable.me)
@@ -196,11 +196,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkUpdate(){
-        toast(CommonUtil.getAssetsFile(this))
-//        UpdateManager.setDebuggable(true)
-//        UpdateManager.setWifiOnly(false)
-//        UpdateManager.setUrl(mCheckUrl, "main")
-//        UpdateManager.check(this)
+        UpdateManager.setDebuggable(true)
+        UpdateManager.setWifiOnly(false)
+        UpdateManager.setUrl(mCheckUrl, "main")
+        UpdateManager.check(this)
     }
 }
 
