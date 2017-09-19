@@ -110,7 +110,7 @@ class MeFragment : Fragment() {
         bt_login= rootView!!.find(R.id.email_sign_in_button)
         weixin_login= rootView!!.find(R.id.weixin_login)
         vs_content= rootView!!.find(R.id.vs_content)
-//        vs_content.showNext()
+        vs_content.showNext()
 
         return rootView
     }

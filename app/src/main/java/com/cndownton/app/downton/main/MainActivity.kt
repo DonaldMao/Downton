@@ -15,7 +15,9 @@ import com.cndownton.app.downton.main.home.HomeFragment
 import com.cndownton.app.downton.main.mall.MallFragment
 import com.cndownton.app.downton.main.me.MeFragment
 import com.cndownton.app.downton.main.surround.SurroundFragment
+import com.cndownton.app.downton.util.CommonUtil
 import ezy.boost.update.UpdateManager
+import org.jetbrains.anko.toast
 import permissions.dispatcher.*
 
 @RuntimePermissions()
@@ -194,10 +196,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkUpdate(){
-        UpdateManager.setDebuggable(true)
-        UpdateManager.setWifiOnly(false)
-        UpdateManager.setUrl(mCheckUrl, "main")
-        UpdateManager.check(this)
+        toast(CommonUtil.getAssetsFile(this))
+//        UpdateManager.setDebuggable(true)
+//        UpdateManager.setWifiOnly(false)
+//        UpdateManager.setUrl(mCheckUrl, "main")
+//        UpdateManager.check(this)
     }
 }
 

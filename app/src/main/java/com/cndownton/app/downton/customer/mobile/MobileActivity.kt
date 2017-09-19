@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.cndownton.app.R
-import com.cndownton.app.downton.data.SMScode
+import com.cndownton.app.downton.data.bean.SMScode
 import com.cndownton.app.downton.util.CommonUtil
 import com.cndownton.app.downton.util.HMACSHA256
 import com.cndownton.app.downton.util.JsonUitl
@@ -86,13 +86,13 @@ class MobileActivity : AppCompatActivity() {
                 .post()
                 .url("http://www.cndownton.com/tools/app_api.ashx?action=user_verify_smscode")
                 .addParams("time",nowTime)
-                .addParams("sign", HMACSHA256.sha256_HMAC(str))
+                .addParams("sign", HMACSHA256.sha256_HMAC(this,str))
                 .addParams("mobile",phoneNumber)
                 .build()
                 .execute(object:StringCallback(){
                     override fun onResponse(response: String?, id: Int) {
 
-                        val code=JsonUitl.stringToObject(response,SMScode::class.java)as SMScode
+                        val code=JsonUitl.stringToObject(response, SMScode::class.java)as SMScode
                         Toast.makeText(this@MobileActivity,code.msg,Toast.LENGTH_LONG).show()
 
                     }

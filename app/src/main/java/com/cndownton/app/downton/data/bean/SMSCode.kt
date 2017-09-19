@@ -1,4 +1,4 @@
-package com.cndownton.app.downton.data
+package com.cndownton.app.downton.data.bean
 
 /**
  * Created by Mpf on 2017/9/17.
