@@ -21,10 +21,10 @@ class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        regToWx()//regist weixin
+        regToWx()
         initOkHttp()
     }
-
+    //初始化OkHttp
     private fun initOkHttp() {
         val okHttpClient = OkHttpClient.Builder()
                 //                .addInterceptor(new LoggerInterceptor("TAG"))
@@ -35,7 +35,7 @@ class MyApplication : Application() {
 
         OkHttpUtils.initClient(okHttpClient)
     }
-
+    //regist weixin
     private fun regToWx() {
         api = WXAPIFactory.createWXAPI(this, APP_ID, true)
         api.registerApp(APP_ID)

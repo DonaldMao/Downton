@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.cndownton.app.R;
 import com.cndownton.app.downton.MyApplication;
 import com.cndownton.app.downton.data.bean.Access_tokenCode;
+import com.cndownton.app.downton.data.bean.WXUserInfo;
 import com.cndownton.app.downton.main.MainActivity;
 import com.cndownton.app.downton.util.JsonUitl;
 import com.cndownton.app.downton.util.SharedPreferencesUtil;
@@ -61,10 +62,26 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
                         util.put("token",code.getAccess_token());
                         util.put("refreshToken",code.getRefresh_token());
                         util.put("expires",code.getExpires_in());
+
+
+                        String userInfoUrl="https://api.weixin.qq.com/sns/userinfo?access_token="+code.getAccess_token()
+                                +"&openid="+code.getOpenid();
+                        OkHttpUtils.get().url(userInfoUrl).build().execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+
+                            }
+
+                            @Override
+                            public void onResponse(String response, int id) {
+                                WXUserInfo info= (WXUserInfo) JsonUitl.INSTANCE.stringToObject(response,WXUserInfo.class);
+
+                            }
+                        });
                         
                     }
                 });
-                
+
                 startActivity(new Intent(this, MainActivity.class));
                 break;
 
