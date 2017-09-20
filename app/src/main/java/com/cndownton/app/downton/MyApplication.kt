@@ -1,12 +1,16 @@
 package com.cndownton.app.downton
 
+import android.app.Activity
 import android.app.Application
+import com.cndownton.app.downton.data.bean.UserInfo
 import com.tencent.mm.opensdk.openapi.IWXAPI
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import permissions.dispatcher.RuntimePermissions
 import com.zhy.http.okhttp.OkHttpUtils
 import okhttp3.OkHttpClient
+import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.collections.ArrayList
 
 
 /**
@@ -16,7 +20,30 @@ class MyApplication : Application() {
     companion object {
         val APP_ID: String = "wx5269ea51c51983b1"
         lateinit var api: IWXAPI
+        var user: UserInfo? = null
+        var isLogin:Boolean=false
+        val activityList: ArrayList<Activity> = ArrayList()
+        fun addActivity(act:Activity){
+            activityList.add(act)
+        }
+        fun removeActivity(){
+            for(act in activityList){
+                act.finish()
+            }
+        }
     }
+
+    fun logIn(userInfo: UserInfo){
+        user=userInfo
+        isLogin=true
+    }
+
+    fun logOut(){
+        user=null
+        isLogin=false
+    }
+
+
 
 
     override fun onCreate() {

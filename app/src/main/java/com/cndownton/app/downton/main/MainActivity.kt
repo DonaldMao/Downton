@@ -1,6 +1,7 @@
 package com.cndownton.app.downton.main
 
 import android.Manifest
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentPagerAdapter
@@ -10,6 +11,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.ImageView
 import android.widget.Toast
 import com.cndownton.app.R
+import com.cndownton.app.downton.MyApplication
 import com.cndownton.app.downton.main.community.CommunityFragment
 import com.cndownton.app.downton.main.home.HomeFragment
 import com.cndownton.app.downton.main.mall.MallFragment
@@ -33,9 +35,11 @@ class MainActivity : AppCompatActivity() {
 
     private val mCheckUrl = "http://192.168.1.99/update.php"
 
+    private lateinit var mIntent:Intent
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        mIntent=intent
         MainActivityPermissionsDispatcher.getPermissionsWithCheck(this)
 //        checkUpdate()
         iv_home_tab = findViewById(R.id.iv_home_tab)
@@ -145,9 +149,18 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
-
+        initIntent(mIntent)
     }
 
+    private fun initIntent(intent: Intent) {
+
+        var isLogin=intent.getBooleanExtra("login",false)
+        if(isLogin){toast("1")
+            (mFragments[3] as MeFragment).setView()
+            vp_main.currentItem = 2
+
+        }
+    }
 
 
     private fun unSelect(iv_selected: ImageView?) {
@@ -200,6 +213,31 @@ class MainActivity : AppCompatActivity() {
         UpdateManager.setWifiOnly(false)
         UpdateManager.setUrl(mCheckUrl, "main")
         UpdateManager.check(this)
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        toast("restart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        toast("resume")
+        if(MyApplication.isLogin){
+            toast("islogin")
+            (mFragments[3] as MeFragment).setView()
+        }
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        toast("pause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        toast("stop")
     }
 }
 

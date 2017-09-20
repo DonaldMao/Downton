@@ -15,6 +15,7 @@ import com.cndownton.app.downton.MyApplication
 import com.cndownton.app.downton.customer.message.MessageActivity
 import com.cndownton.app.downton.customer.mobile.MobileActivity
 import com.cndownton.app.downton.customer.setting.SettingActivity
+import com.cndownton.app.downton.main.MainActivity
 import com.tencent.mm.opensdk.modelmsg.SendAuth
 import org.jetbrains.anko.find
 import org.jetbrains.anko.support.v4.startActivity
@@ -110,7 +111,10 @@ class MeFragment : Fragment() {
         bt_login= rootView!!.find(R.id.email_sign_in_button)
         weixin_login= rootView!!.find(R.id.weixin_login)
         vs_content= rootView!!.find(R.id.vs_content)
-        vs_content.showNext()
+        if(!MyApplication.isLogin){
+            vs_content.showNext()
+        }
+
         return rootView
     }
 
@@ -138,7 +142,11 @@ class MeFragment : Fragment() {
         ll_zone.setOnClickListener{toast("地区")}
 
         bt_login.setOnClickListener{}
-        weixin_login.setOnClickListener{wxLogin()}}
+        weixin_login.setOnClickListener{
+//            vs_content.showPrevious()
+            wxLogin()
+        }
+    }
 
     // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {
@@ -162,6 +170,7 @@ class MeFragment : Fragment() {
     }
 
     fun wxLogin(){
+        MyApplication.addActivity(activity as MainActivity)
         if (!MyApplication.api.isWXAppInstalled){
             toast("微信没有安装")
             return
@@ -170,6 +179,10 @@ class MeFragment : Fragment() {
         req.scope="snsapi_userinfo"
         req.state="towndon_wx_login"
         MyApplication.api.sendReq(req)
+    }
+
+    fun setView(){
+        vs_content.showPrevious()
     }
     /**
      * This interface must be implemented by activities that contain this
