@@ -15,8 +15,10 @@ import com.cndownton.app.R
 import com.cndownton.app.downton.MyApplication
 import com.cndownton.app.downton.customer.message.MessageActivity
 import com.cndownton.app.downton.customer.mobile.MobileActivity
+import com.cndownton.app.downton.customer.order.OrderActivity
 import com.cndownton.app.downton.customer.setting.SettingActivity
 import com.cndownton.app.downton.main.MainActivity
+import com.makeramen.roundedimageview.RoundedImageView
 import com.tencent.mm.opensdk.modelmsg.SendAuth
 import org.jetbrains.anko.find
 import org.jetbrains.anko.support.v4.startActivity
@@ -53,7 +55,7 @@ class MeFragment : Fragment() {
     private lateinit var ib_message_toolbar: ImageButton
     private lateinit var ib_setting:ImageButton
     private lateinit var ib_mobile:ImageButton
-    private lateinit var ib_avatar:ImageButton
+    private lateinit var ib_avatar: RoundedImageView
     private lateinit var tv_focus:TextView
     private lateinit var tv_fans:TextView
     private lateinit var tv_favorite:TextView
@@ -142,7 +144,7 @@ class MeFragment : Fragment() {
         tv_fans.setOnClickListener{toast("粉丝")}
         tv_favorite.setOnClickListener { toast("收集") }
 
-        ll_order.setOnClickListener{toast("订单")}
+        ll_order.setOnClickListener{startActivity(Intent(activity,OrderActivity::class.java))}
         ll_cart.setOnClickListener{toast("购物车")}
         ll_surround.setOnClickListener{toast("周边")}
         ll_shop.setOnClickListener{toast("开店")}

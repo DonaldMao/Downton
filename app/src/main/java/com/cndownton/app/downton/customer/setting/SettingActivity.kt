@@ -7,12 +7,20 @@ import android.view.Menu
 import android.view.MenuItem
 import com.cndownton.app.R
 import com.cndownton.app.downton.util.setupActionBar
+import com.jaredrummler.materialspinner.MaterialSpinner
+
 import org.jetbrains.anko.find
 import org.jetbrains.anko.toast
+import java.util.*
+import java.util.Arrays.asList
+
+
 
 class SettingActivity : AppCompatActivity() {
     private lateinit var sl_refresh:SwipeRefreshLayout
     private lateinit var mSettingPresenter:SettingPresenter
+
+    private lateinit var ms_sex:MaterialSpinner
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
@@ -28,6 +36,12 @@ class SettingActivity : AppCompatActivity() {
             //异步获取网络数据，随后UI更新
             sl_refresh.isRefreshing=false
         }
+        ms_sex=find(R.id.ms_sex)
+        ms_sex.setItems("男","女")
+        ms_sex.setOnItemSelectedListener { view, position, id, item ->
+
+        }
+
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.setting_toolbar,menu)

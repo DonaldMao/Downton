@@ -82,8 +82,9 @@ class MobileActivity : AppCompatActivity() {
         phoneNumber= et_phonenumber.text.toString()
         Log.i("mpf",phoneNumber)
         nowTime=CommonUtil.getCurrentTime()
-        var str="action=user_verify_smscode&mobile=$phoneNumber&time=$nowTime"
+        var str="mobile=$phoneNumber&time=$nowTime"
         str=str.toUpperCase()
+//        str="MOBILE=13575906457&TIME=20170921223500"
 //        Log.i("mpf",CommonUtil.getRealShaStr("mobile=$phoneNumber","time=$nowTime","action=user_verify_smscode"))
         Log.i("mpf",str)
         Log.i("mpf",HMACSHA256.sha256_HMAC(this,str))
@@ -96,13 +97,13 @@ class MobileActivity : AppCompatActivity() {
                 .build()
                 .execute(object:StringCallback(){
                     override fun onResponse(response: String?, id: Int) {
-
                         val code=JsonUitl.stringToObject(response, SMScode::class.java)as SMScode
                         Toast.makeText(this@MobileActivity,code.msg,Toast.LENGTH_LONG).show()
-
+                        Log.i("mpf",code.msg)
                     }
 
                     override fun onError(call: Call?, e: Exception?, id: Int) {
+                        Toast.makeText(this@MobileActivity, e?.message,Toast.LENGTH_LONG).show()
 
                     }
 

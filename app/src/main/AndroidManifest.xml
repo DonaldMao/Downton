@@ -38,6 +38,8 @@
         </activity>
         <activity android:name=".downton.customer.mobile.MobileActivity">
         </activity>
+        <activity android:name=".downton.customer.order.OrderActivity">
+        </activity>
     </application>
 
 </manifest>
