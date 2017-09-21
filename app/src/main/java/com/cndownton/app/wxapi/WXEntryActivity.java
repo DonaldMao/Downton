@@ -14,6 +14,7 @@ import com.cndownton.app.downton.data.bean.UserInfo;
 import com.cndownton.app.downton.data.bean.WXUserInfo;
 import com.cndownton.app.downton.main.MainActivity;
 import com.cndownton.app.downton.util.JsonUitl;
+import com.cndownton.app.downton.util.SharedPreferencesUtil;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
@@ -80,6 +81,8 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
                             public void onResponse(String response, int id) {
 //                                Toast.makeText(WXEntryActivity.this,response,Toast.LENGTH_LONG).show();
                                 WXUserInfo info= (WXUserInfo) JsonUitl.INSTANCE.stringToObject(response,WXUserInfo.class);
+                                SharedPreferencesUtil util= new SharedPreferencesUtil(WXEntryActivity.this,"user");
+                                util.put("unionid",info.getUnionid());
                                 OkHttpUtils.get().url("http://www.cndownton.com/tools/app_api.ashx?action=user_login_weixin_unionid&unionid="+info.getUnionid())
                                     .build().execute(new StringCallback() {
                                     @Override

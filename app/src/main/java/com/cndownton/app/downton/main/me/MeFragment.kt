@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import com.bumptech.glide.Glide
 import com.cndownton.app.R
 import com.cndownton.app.downton.MyApplication
 import com.cndownton.app.downton.customer.message.MessageActivity
@@ -32,6 +33,10 @@ import q.rorbin.badgeview.QBadgeView
  */
 class MeFragment : Fragment() {
 
+
+
+
+
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
     private var mParam2: String? = null
@@ -40,6 +45,10 @@ class MeFragment : Fragment() {
 
     private var rootView: View? = null
     private lateinit var mBadgeviewContainer: View
+
+    private lateinit var tv_ID_score:TextView
+    private lateinit var tv_nickname:TextView
+
 
     private lateinit var ib_message_toolbar: ImageButton
     private lateinit var ib_setting:ImageButton
@@ -87,6 +96,10 @@ class MeFragment : Fragment() {
         QBadgeView(activity).bindTarget(ib_message_toolbar).setBadgeText("2")
                 .setBadgeTextSize(5f,true)
                 .setBadgeGravity(Gravity.CENTER )
+
+        tv_ID_score= rootView!!.find(R.id.tv_ID_score)
+        tv_nickname= rootView!!.find(R.id.tv_nickname)
+
         ib_setting=rootView!!.find(R.id.ib_setting)
         ib_mobile= rootView!!.find(R.id.ib_mobile)
         ib_avatar=rootView!!.find(R.id.ib_avatar)
@@ -112,7 +125,9 @@ class MeFragment : Fragment() {
         weixin_login= rootView!!.find(R.id.weixin_login)
         vs_content= rootView!!.find(R.id.vs_content)
         if(!MyApplication.isLogin){
-            vs_content.showNext()
+//            vs_content.showNext()
+        }else{
+            refreshView()
         }
 
         return rootView
@@ -181,8 +196,18 @@ class MeFragment : Fragment() {
         MyApplication.api.sendReq(req)
     }
 
-    fun setView(){
-        vs_content.showPrevious()
+    fun setView(index:Int){
+        when(index){
+            0->vs_content.showPrevious()
+            1->vs_content.showNext()
+
+        }
+    }
+
+    fun refreshView(){
+        Glide.with(activity).load(MyApplication.user?.avatar).into(ib_avatar)
+        tv_ID_score.setText("编号：${MyApplication.user?.BianHao} 积分：${MyApplication.user?.point}")
+        tv_nickname.setText(MyApplication.user?.nick_name)
     }
     /**
      * This interface must be implemented by activities that contain this
@@ -199,6 +224,11 @@ class MeFragment : Fragment() {
     }
 
     companion object {
+
+        val MEFRAGMENT_FIRSTVIEW:Int=0
+        val MEFRAGMENT_SECONDTVIEW:Int=1
+
+
         // TODO: Rename parameter arguments, choose names that match
         // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
         private val ARG_PARAM1 = "param1"

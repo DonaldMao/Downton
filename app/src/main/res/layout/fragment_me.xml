@@ -97,7 +97,7 @@
                     android:tint="@android:color/holo_orange_dark"/>
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/tv_nickname"
                     android:layout_width="match_parent"
                     android:layout_height="24dp"
                     android:layout_below="@+id/imageButton3"
@@ -109,10 +109,10 @@
                     android:textStyle="bold"/>
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/tv_ID_score"
                     android:layout_width="match_parent"
                     android:layout_height="16dp"
-                    android:layout_below="@+id/textView"
+                    android:layout_below="@+id/tv_nickname"
                     android:layout_centerHorizontal="true"
                     android:text="编号：123456 积分：520"
                     android:textAlignment="center"
@@ -840,5 +840,6 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout"/>
     </android.support.constraint.ConstraintLayout>
+
 </ViewSwitcher>
 

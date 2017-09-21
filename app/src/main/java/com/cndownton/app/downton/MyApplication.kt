@@ -22,6 +22,7 @@ class MyApplication : Application() {
         lateinit var api: IWXAPI
         var user: UserInfo? = null
         var isLogin:Boolean=false
+        var needFreshMeFrag=false
         val activityList: ArrayList<Activity> = ArrayList()
         fun addActivity(act:Activity){
             activityList.add(act)
@@ -36,6 +37,7 @@ class MyApplication : Application() {
     fun logIn(userInfo: UserInfo){
         user=userInfo
         isLogin=true
+        needFreshMeFrag=true
     }
 
     fun logOut(){

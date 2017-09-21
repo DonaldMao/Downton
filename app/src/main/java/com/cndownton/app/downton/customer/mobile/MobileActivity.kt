@@ -18,6 +18,7 @@ import com.zhy.http.okhttp.OkHttpUtils
 import com.zhy.http.okhttp.callback.StringCallback
 import okhttp3.Call
 import org.jetbrains.anko.find
+import org.jetbrains.anko.toast
 
 import java.lang.Exception
 
@@ -81,7 +82,11 @@ class MobileActivity : AppCompatActivity() {
         phoneNumber= et_phonenumber.text.toString()
         Log.i("mpf",phoneNumber)
         nowTime=CommonUtil.getCurrentTime()
-        val str="MOBILE=$phoneNumber&TIME=$nowTime"
+        var str="action=user_verify_smscode&mobile=$phoneNumber&time=$nowTime"
+        str=str.toUpperCase()
+//        Log.i("mpf",CommonUtil.getRealShaStr("mobile=$phoneNumber","time=$nowTime","action=user_verify_smscode"))
+        Log.i("mpf",str)
+        Log.i("mpf",HMACSHA256.sha256_HMAC(this,str))
         OkHttpUtils
                 .post()
                 .url("http://www.cndownton.com/tools/app_api.ashx?action=user_verify_smscode")

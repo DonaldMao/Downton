@@ -5,6 +5,9 @@ import android.content.Context
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 import kotlin.experimental.and
+import com.tencent.wxop.stat.common.l.n
+
+
 
 /**
 * Created by Administrator_mpf_mpf on 2017/9/16.
@@ -23,7 +26,7 @@ object HMACSHA256 {
         var stmp: String
         var n = 0
         while (b != null && n < b.size) {
-            stmp = Integer.toHexString((b[n] and 0XFF.toByte()).toInt())
+            stmp = Integer.toHexString(b[n].toInt() and 0XFF)
             if (stmp.length == 1)
                 hs.append('0')
             hs.append(stmp)

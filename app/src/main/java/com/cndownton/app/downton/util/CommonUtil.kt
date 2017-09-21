@@ -1,10 +1,10 @@
 package com.cndownton.app.downton.util
 
 import android.content.Context
-import java.text.SimpleDateFormat
-import java.util.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 /**
@@ -24,6 +24,16 @@ object CommonUtil {
             e.printStackTrace()
         }
         return null.toString()
+    }
+    fun getRealShaStr(vararg args:String): String {
+        val result= StringBuilder()
+        Arrays.sort(args)
+        for(item in args){
+            result.append("&")
+            result.append(item)
+        }
+        result.deleteCharAt(0)
+        return result.toString().toUpperCase()
     }
 
 }
