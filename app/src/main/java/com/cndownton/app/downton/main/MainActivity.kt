@@ -16,12 +16,10 @@ import com.cndownton.app.downton.MyApplication
 import com.cndownton.app.downton.data.bean.UserInfo
 import com.cndownton.app.downton.main.community.CommunityFragment
 import com.cndownton.app.downton.main.home.HomeFragment
-import com.cndownton.app.downton.main.mall.MallFragment
 import com.cndownton.app.downton.main.me.MeFragment
 import com.cndownton.app.downton.main.surround.SurroundFragment
-import com.cndownton.app.downton.util.CommonUtil
-import com.cndownton.app.downton.util.JsonUitl
-import com.cndownton.app.downton.util.SharedPreferencesUtil
+import com.cndownton.app.downton.util.*
+import com.cndownton.app.wxapi.WXEntryActivity
 import com.zhy.http.okhttp.OkHttpUtils
 import com.zhy.http.okhttp.callback.StringCallback
 import ezy.boost.update.UpdateManager
@@ -42,6 +40,8 @@ class MainActivity : AppCompatActivity() {
     private val mFragments: ArrayList<Fragment> = ArrayList()
 
     private val mCheckUrl = "http://192.168.1.99/update.php"
+    private var nowTime: String? = null
+    private var signStr: String? = null
 
     private lateinit var mIntent: Intent
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -230,14 +230,20 @@ class MainActivity : AppCompatActivity() {
     override fun onRestart() {
         super.onRestart()
         toast("restart")
+        log("restart")
     }
 
+
+
     override fun onResume() {
+        toast("resume")
+        log("resume")
         super.onResume()
         val data = SharedPreferencesUtil(this, "user")
 
         if (!MyApplication.isLogin && data.contain("unionid")) {
-            toast("unionid")
+//            toast("unionid")
+            log("resume login ${MyApplication.isLogin}   ${data.contain("unionid")}")
             loginUser(data.getSharedPreference("unionid","") as String)
 
         } else if (MyApplication.needFreshMeFrag) {
@@ -249,21 +255,31 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onPause() {
+        log("pause")
         super.onPause()
         toast("pause")
     }
 
     override fun onStop() {
+        log("stop")
         super.onStop()
         toast("stop")
     }
 
     private fun loginUser(unionid:String) {
-        OkHttpUtils.get().url("http://www.cndownton.com/tools/app_api.ashx?action=user_login_weixin_unionid&unionid=" + unionid)
+        nowTime = CommonUtil.getCurrentTime()
+        signStr = CommonUtil.getRealShaStr("time=" + nowTime, "unionid=" + unionid)
+
+        OkHttpUtils.post().url("http://www.cndownton.com/tools/app_api.ashx?action=user_login_weixin_unionid")
+                .addParams("time",nowTime).addParams("unionid",unionid).addParams("sign", HMACSHA256.sha256_HMAC(this, signStr!!))
+
                 .build().execute(object : StringCallback() {
             override fun onError(call: Call, e: Exception, id: Int) {
+                 Log.i("mpf",e.message)
             }
             override fun onResponse(response: String, id: Int) {
+                Log.i("mpf",response)
+
                 try {
                     val mObject = JSONObject(response)
                     val info = JsonUitl.stringToObject(mObject.getString("msg"), UserInfo::class.java) as UserInfo

@@ -27,7 +27,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".downton.main.MainActivity"/>
         </activity>
-        <activity android:name=".downton.customer.setting.SettingActivity">
+        <activity android:name=".downton.customer.setting.SettingActivity"
+                  android:windowSoftInputMode="stateHidden|stateAlwaysHidden"
+            >
         </activity>
         <activity
             android:name=".wxapi.WXEntryActivity"

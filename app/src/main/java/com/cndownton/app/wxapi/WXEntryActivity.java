@@ -3,6 +3,7 @@ package com.cndownton.app.wxapi;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,6 +14,8 @@ import com.cndownton.app.downton.data.bean.LoginCode;
 import com.cndownton.app.downton.data.bean.UserInfo;
 import com.cndownton.app.downton.data.bean.WXUserInfo;
 import com.cndownton.app.downton.main.MainActivity;
+import com.cndownton.app.downton.util.CommonUtil;
+import com.cndownton.app.downton.util.HMACSHA256;
 import com.cndownton.app.downton.util.JsonUitl;
 import com.cndownton.app.downton.util.SharedPreferencesUtil;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
@@ -29,6 +32,8 @@ import okhttp3.Call;
 
 public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
     private TextView mView;
+    private String nowTime;
+    private String signStr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,16 +87,22 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
 //                                Toast.makeText(WXEntryActivity.this,response,Toast.LENGTH_LONG).show();
                                 WXUserInfo info= (WXUserInfo) JsonUitl.INSTANCE.stringToObject(response,WXUserInfo.class);
                                 SharedPreferencesUtil util= new SharedPreferencesUtil(WXEntryActivity.this,"user");
+                                nowTime= CommonUtil.INSTANCE.getCurrentTime();
+                                signStr=CommonUtil.INSTANCE.getRealShaStr("time="+nowTime,"unionid="+info.getUnionid());
+
+
                                 util.put("unionid",info.getUnionid());
-                                OkHttpUtils.get().url("http://www.cndownton.com/tools/app_api.ashx?action=user_login_weixin_unionid&unionid="+info.getUnionid())
-                                    .build().execute(new StringCallback() {
+                                OkHttpUtils.post().url("http://www.cndownton.com/tools/app_api.ashx?action=user_login_weixin_unionid")
+                                    .addParams("time",nowTime).addParams("unionid",info.getUnionid()).addParams("sign", HMACSHA256.INSTANCE.sha256_HMAC(WXEntryActivity.this,signStr))
+                                        .build().execute(new StringCallback() {
                                     @Override
                                     public void onError(Call call, Exception e, int id) {
-
+                                        Log.i("mpf",e.getMessage());
                                     }
 
                                     @Override
                                     public void onResponse(final String response, int id) {
+                                        Log.i("mpf",response);
                                         JSONObject object = null;
                                         try {
                                             object=new JSONObject(response);
@@ -102,6 +113,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
                                                 UserInfo info= (UserInfo) JsonUitl.INSTANCE.stringToObject(object.getString("msg"),UserInfo.class);
                                                 MyApplication application= (MyApplication) getApplication();
                                                 application.logIn(info);
+                                                MyApplication.Companion.setNeedFreshMeFrag(true);
 //                                                MyApplication.Companion.removeActivity();
 //                                                Intent intent=new Intent(WXEntryActivity.this, MainActivity.class);
 //                                                intent.putExtra("login",true);

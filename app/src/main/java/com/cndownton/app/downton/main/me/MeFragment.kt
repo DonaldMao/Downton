@@ -1,10 +1,13 @@
 package com.cndownton.app.downton.main.me
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.opengl.Visibility
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -34,11 +37,6 @@ import q.rorbin.badgeview.QBadgeView
  * create an instance of this fragment.
  */
 class MeFragment : Fragment() {
-
-
-
-
-
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
     private var mParam2: String? = null
@@ -80,6 +78,7 @@ class MeFragment : Fragment() {
     private lateinit var weixin_login:ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.i("mpf","me create")
         if (arguments != null) {
             mParam1 = arguments.getString(ARG_PARAM1)
             mParam2 = arguments.getString(ARG_PARAM2)
@@ -88,6 +87,7 @@ class MeFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        Log.i("mpf","me onCreateView")
         rootView = inflater!!.inflate(R.layout.fragment_me, container, false)
         mBadgeviewContainer = rootView!!.find(R.id.badgeview_container)
         QBadgeView(activity).bindTarget(mBadgeviewContainer).setBadgeNumber(6)
@@ -127,9 +127,11 @@ class MeFragment : Fragment() {
         weixin_login= rootView!!.find(R.id.weixin_login)
         vs_content= rootView!!.find(R.id.vs_content)
         if(!MyApplication.isLogin){
-//            vs_content.showNext()
+            vs_content.showNext()
+            Log.i("mpf","me showNext")
         }else{
             refreshView()
+            Log.i("mpf","me refreshView")
         }
 
         return rootView
@@ -160,7 +162,6 @@ class MeFragment : Fragment() {
 
         bt_login.setOnClickListener{}
         weixin_login.setOnClickListener{
-//            vs_content.showPrevious()
             wxLogin()
         }
     }
@@ -206,10 +207,14 @@ class MeFragment : Fragment() {
         }
     }
 
+    @SuppressLint("WrongConstant")
     fun refreshView(){
         Glide.with(activity).load(MyApplication.user?.avatar).into(ib_avatar)
-        tv_ID_score.setText("编号：${MyApplication.user?.BianHao} 积分：${MyApplication.user?.point}")
+        tv_ID_score.setText("编号：${MyApplication.user?.user_name} 积分：${MyApplication.user?.point} 金豆：${MyApplication.user?.coin}")
         tv_nickname.setText(MyApplication.user?.nick_name)
+        if(MyApplication.user?.mobile!=""){
+            ib_mobile.visibility=View.GONE
+        }
     }
     /**
      * This interface must be implemented by activities that contain this

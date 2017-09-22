@@ -37,7 +37,6 @@ class MyApplication : Application() {
     fun logIn(userInfo: UserInfo){
         user=userInfo
         isLogin=true
-        needFreshMeFrag=true
     }
 
     fun logOut(){

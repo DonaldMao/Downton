@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.cndownton.app.R
+import com.cndownton.app.downton.MyApplication
 import com.cndownton.app.downton.data.bean.SMScode
 import com.cndownton.app.downton.util.CommonUtil
 import com.cndownton.app.downton.util.HMACSHA256
@@ -31,6 +32,7 @@ class MobileActivity : AppCompatActivity() {
     private lateinit var phoneNumber:String
     private lateinit var verificationCode:String
     private lateinit var nowTime:String
+    private  var userId:Int?= MyApplication.user?.id
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mobile)
@@ -53,10 +55,39 @@ class MobileActivity : AppCompatActivity() {
         }
         bt_confirm=find(R.id.bt_confirm)
         bt_confirm.setOnClickListener {
-
+            confirmBind()
         }
         et_phonenumber=find(R.id.et_phonenumber)
         et_verificationcode=find(R.id.et_verificationcode)
+
+    }
+
+    private fun confirmBind() {
+        verificationCode=et_verificationcode.text.toString()
+        nowTime=CommonUtil.getCurrentTime()
+        val str=CommonUtil.getRealShaStr("txtMobile=$phoneNumber","txtCode=$verificationCode","user_id=$userId","time=$nowTime")
+        Log.i("mpf",str)
+
+        OkHttpUtils
+                .get()
+                .url("http://www.cndownton.com/tools/app_api.ashx?action=user_mobile_bind")
+                .addParams("time",nowTime)
+                .addParams("sign", HMACSHA256.sha256_HMAC(this,str))
+                .addParams("txtMobile",phoneNumber)
+                .addParams("txtCode",verificationCode)
+                .addParams("user_id", userId.toString())
+                .build()
+                .execute(object :StringCallback(){
+                    override fun onResponse(response: String?, id: Int) {
+                        Log.i("mpf",response)
+                    }
+
+                    override fun onError(call: Call?, e: Exception?, id: Int) {
+                        Log.i("mpf",e?.message)
+
+                    }
+
+                })
 
     }
 
@@ -73,6 +104,7 @@ class MobileActivity : AppCompatActivity() {
         override fun onTick(p0: Long) {
             bt_send_cod.text= "${count--}s后重发"
 
+
         }
     }
 
@@ -80,14 +112,8 @@ class MobileActivity : AppCompatActivity() {
 
     private fun sendCode(){
         phoneNumber= et_phonenumber.text.toString()
-        Log.i("mpf",phoneNumber)
         nowTime=CommonUtil.getCurrentTime()
-        var str="mobile=$phoneNumber&time=$nowTime"
-        str=str.toUpperCase()
-//        str="MOBILE=13575906457&TIME=20170921223500"
-//        Log.i("mpf",CommonUtil.getRealShaStr("mobile=$phoneNumber","time=$nowTime","action=user_verify_smscode"))
-        Log.i("mpf",str)
-        Log.i("mpf",HMACSHA256.sha256_HMAC(this,str))
+        val str=CommonUtil.getRealShaStr("time=$nowTime","mobile=$phoneNumber")
         OkHttpUtils
                 .post()
                 .url("http://www.cndownton.com/tools/app_api.ashx?action=user_verify_smscode")
