@@ -1,6 +1,7 @@
 package com.cndownton.app.downton.main.home
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -12,6 +13,8 @@ import android.view.ViewGroup
 import android.webkit.WebView
 
 import com.cndownton.app.R
+import com.cndownton.app.downton.BaseFragment
+import im.delight.android.webview.AdvancedWebView
 import org.jetbrains.anko.find
 
 /**
@@ -22,7 +25,23 @@ import org.jetbrains.anko.find
  * Use the [HomeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment(), AdvancedWebView.Listener {
+
+
+    override fun onPageFinished(url: String?) {
+    }
+
+    override fun onPageError(errorCode: Int, description: String?, failingUrl: String?) {
+    }
+
+    override fun onDownloadRequested(url: String?, suggestedFilename: String?, mimeType: String?, contentLength: Long, contentDisposition: String?, userAgent: String?) {
+    }
+
+    override fun onExternalPageRequest(url: String?) {
+    }
+
+    override fun onPageStarted(url: String?, favicon: Bitmap?) {
+    }
 
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
@@ -32,7 +51,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var toolbar: Toolbar
     private var mActivity: AppCompatActivity? =null
-    private var wv_home:WebView?=null
+    private lateinit var wv_home:AdvancedWebView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
@@ -45,8 +64,8 @@ class HomeFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view=inflater!!.inflate(R.layout.fragment_home, container, false)
-        wv_home= view.find<WebView>(R.id.wv_home)
-        (wv_home as WebView).loadUrl("http://www.cndownton.com/index.html")
+        wv_home= view.find(R.id.wv_home)
+        wv_home.loadUrl("http://www.cndownton.com/index.html")
         toolbar=view.find(R.id.toolbar_home)
         toolbar.title=""
         mActivity= activity as AppCompatActivity?
@@ -74,6 +93,20 @@ class HomeFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
         mListener = null
+    }
+    override fun onResume() {
+        super.onResume()
+        wv_home.onResume()
+    }
+
+    override fun onPause() {
+        wv_home.onPause()
+        super.onPause()
+    }
+
+    override fun onDestroy() {
+        wv_home.onDestroy()
+        super.onDestroy()
     }
 
     /**
@@ -115,5 +148,8 @@ class HomeFragment : Fragment() {
             fragment.arguments = args
             return fragment
         }
+    }
+    override fun onBackPressed(): Boolean {
+        return wv_home.onBackPressed()
     }
 }// Required empty public constructor

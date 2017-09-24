@@ -29,10 +29,10 @@
                 />
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
-    <WebView
+    <im.delight.android.webview.AdvancedWebView
         android:id="@+id/wv_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </WebView>
+    </im.delight.android.webview.AdvancedWebView>
 
 </LinearLayout>

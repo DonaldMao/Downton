@@ -12,6 +12,7 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import com.cndownton.app.R
+import com.cndownton.app.downton.BaseFragment
 import com.cndownton.app.downton.MyApplication
 import com.cndownton.app.downton.data.bean.UserInfo
 import com.cndownton.app.downton.main.community.CommunityFragment
@@ -47,8 +48,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
         mIntent = intent
         MainActivityPermissionsDispatcher.getPermissionsWithCheck(this)
 //        checkUpdate()
@@ -162,16 +161,6 @@ class MainActivity : AppCompatActivity() {
 //        initIntent(mIntent)
     }
 
-//    private fun initIntent(intent: Intent) {
-//
-//        var isLogin=intent.getBooleanExtra("login",false)
-//        if(isLogin){toast("1")
-//            (mFragments[3] as MeFragment).setView()
-//            vp_main.currentItem = 2
-//
-//        }
-//    }
-
 
     private fun unSelect(iv_selected: ImageView?) {
         when (iv_selected) {
@@ -183,7 +172,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
+    override fun onBackPressed() {
+        if(!(mFragments[vp_main.currentItem] as BaseFragment).onBackPressed()){
+            Log.i("mpf","back")
+            return}
+        super.onBackPressed()
+    }
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         MainActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults)
@@ -229,14 +223,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onRestart() {
         super.onRestart()
-        toast("restart")
         log("restart")
     }
 
 
 
     override fun onResume() {
-        toast("resume")
         log("resume")
         super.onResume()
         val data = SharedPreferencesUtil(this, "user")
@@ -257,13 +249,11 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         log("pause")
         super.onPause()
-        toast("pause")
     }
 
     override fun onStop() {
         log("stop")
         super.onStop()
-        toast("stop")
     }
 
     private fun loginUser(unionid:String) {

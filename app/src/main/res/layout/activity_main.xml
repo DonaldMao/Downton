@@ -1,94 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cndownton.app.downton.main.MainActivity"
-    android:orientation="vertical">
+    tools:context="com.cndownton.app.downton.main.MainActivity">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_home"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
         />
-    <android.support.v7.widget.AppCompatImageView
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
         android:src="#cecece"
         />
+
     <LinearLayout
+        android:id="@+id/bottom"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:orientation="horizontal"
-        >
+        android:background="@color/white"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
             android:gravity="center"
+            android:orientation="vertical"
             >
+
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/iv_home_tab"
                 android:layout_width="match_parent"
-                android:src="@drawable/home_selected"
-                android:layout_height="40dp"/>
+                android:layout_height="40dp"
+                android:src="@drawable/home_selected"/>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="horizontal"
             android:gravity="center"
+            android:orientation="horizontal"
             android:visibility="gone"
             >
+
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/iv_mall_tab"
                 android:layout_width="match_parent"
-                android:src="@drawable/mall"
-                android:layout_height="40dp"/>
+                android:layout_height="40dp"
+                android:src="@drawable/mall"/>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             >
+
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/iv_community_tab"
                 android:layout_width="match_parent"
-                android:src="@drawable/community"
-                android:layout_height="40dp"/>
+                android:layout_height="40dp"
+                android:src="@drawable/community"/>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             >
+
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/iv_surround_tab"
                 android:layout_width="match_parent"
-                android:src="@drawable/surround"
-                android:layout_height="40dp"/>
+                android:layout_height="40dp"
+                android:src="@drawable/surround"/>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             >
+
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/iv_me_tab"
                 android:layout_width="match_parent"
-                android:src="@drawable/me"
-                android:layout_height="40dp"/>
+                android:layout_height="40dp"
+                android:src="@drawable/me"/>
         </LinearLayout>
-        
+
     </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

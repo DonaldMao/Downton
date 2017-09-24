@@ -1,6 +1,7 @@
 package com.cndownton.app.downton.main.community
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -11,6 +12,9 @@ import android.view.*
 import android.widget.Toast
 
 import com.cndownton.app.R
+import com.cndownton.app.downton.BaseFragment
+import im.delight.android.webview.AdvancedWebView
+import org.jetbrains.anko.find
 import org.jetbrains.anko.support.v4.toast
 
 
@@ -22,7 +26,25 @@ import org.jetbrains.anko.support.v4.toast
  * Use the [CommunityFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class CommunityFragment : Fragment() {
+class CommunityFragment : BaseFragment(),AdvancedWebView.Listener {
+    override fun onPageFinished(url: String?) {
+    }
+
+    override fun onPageError(errorCode: Int, description: String?, failingUrl: String?) {
+    }
+
+    override fun onDownloadRequested(url: String?, suggestedFilename: String?, mimeType: String?, contentLength: Long, contentDisposition: String?, userAgent: String?) {
+    }
+
+    override fun onExternalPageRequest(url: String?) {
+    }
+
+    override fun onPageStarted(url: String?, favicon: Bitmap?) {
+    }
+
+    override fun onBackPressed(): Boolean {
+        return mWebView.onBackPressed()
+    }
 
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
@@ -31,6 +53,7 @@ class CommunityFragment : Fragment() {
     private var mListener: OnFragmentInteractionListener? = null
 
     private lateinit var toolbar:Toolbar
+    private lateinit var mWebView:AdvancedWebView
 
     private var mActivity: AppCompatActivity? =null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +70,8 @@ class CommunityFragment : Fragment() {
         val view=inflater!!.inflate(R.layout.fragment_community, container, false)
         toolbar=view.findViewById(R.id.toolbar_community)
         toolbar.title=""
+        mWebView=view.find(R.id.wv_community)
+        mWebView.loadUrl("http://www.cndownton.com/community/64.html")
         mActivity= activity as AppCompatActivity?
         mActivity?.setSupportActionBar(toolbar)
         setHasOptionsMenu(true)
@@ -81,7 +106,20 @@ class CommunityFragment : Fragment() {
         super.onDetach()
         mListener = null
     }
+    override fun onResume() {
+        super.onResume()
+        mWebView.onResume()
+    }
 
+    override fun onPause() {
+        mWebView.onPause()
+        super.onPause()
+    }
+
+    override fun onDestroy() {
+        mWebView.onDestroy()
+        super.onDestroy()
+    }
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated

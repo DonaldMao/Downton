@@ -1,6 +1,8 @@
 package com.cndownton.app.downton.main.surround
 
 import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -12,6 +14,8 @@ import android.view.ViewGroup
 import android.webkit.WebView
 
 import com.cndownton.app.R
+import com.cndownton.app.downton.BaseFragment
+import im.delight.android.webview.AdvancedWebView
 import org.jetbrains.anko.find
 
 /**
@@ -22,7 +26,21 @@ import org.jetbrains.anko.find
  * Use the [SurroundFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SurroundFragment : Fragment() {
+class SurroundFragment : BaseFragment(),AdvancedWebView.Listener {
+    override fun onPageFinished(url: String?) {
+    }
+
+    override fun onPageError(errorCode: Int, description: String?, failingUrl: String?) {
+    }
+
+    override fun onDownloadRequested(url: String?, suggestedFilename: String?, mimeType: String?, contentLength: Long, contentDisposition: String?, userAgent: String?) {
+    }
+
+    override fun onExternalPageRequest(url: String?) {
+    }
+
+    override fun onPageStarted(url: String?, favicon: Bitmap?) {
+    }
 
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
@@ -30,7 +48,7 @@ class SurroundFragment : Fragment() {
 
     private var mListener: OnFragmentInteractionListener? = null
 
-    private lateinit var mWebView: WebView
+    private lateinit var mWebView: AdvancedWebView
 
     private lateinit var toolbar: Toolbar
     private var mActivity: AppCompatActivity? =null
@@ -42,10 +60,15 @@ class SurroundFragment : Fragment() {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        mWebView.onActivityResult(requestCode,resultCode,data)
+    }
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view=inflater!!.inflate(R.layout.fragment_surround, container, false)
         mWebView=view.find(R.id.wv_surround)
+        mWebView.setListener(activity,this)
         mWebView.loadUrl("http://www.cndownton.com/shop_list_new.html")
         toolbar=view.find(R.id.toolbar_surround)
         toolbar.title=""
@@ -74,6 +97,21 @@ class SurroundFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
         mListener = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mWebView.onResume()
+    }
+
+    override fun onPause() {
+        mWebView.onPause()
+        super.onPause()
+    }
+
+    override fun onDestroy() {
+        mWebView.onDestroy()
+        super.onDestroy()
     }
 
     /**
@@ -115,5 +153,10 @@ class SurroundFragment : Fragment() {
             fragment.arguments = args
             return fragment
         }
+
+
+    }
+    override fun onBackPressed(): Boolean {
+        return mWebView.onBackPressed()
     }
 }// Required empty public constructor
