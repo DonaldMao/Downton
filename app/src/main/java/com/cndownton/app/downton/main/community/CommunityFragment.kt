@@ -82,8 +82,8 @@ class CommunityFragment : BaseFragment(),AdvancedWebView.Listener {
         super.onViewCreated(view, savedInstanceState)
     }
      override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        menu?.clear()
-         inflater?.inflate(R.menu.community_toolbar,menu)
+//        menu?.clear()
+//         inflater?.inflate(R.menu.community_toolbar,menu)
     }
 
     // TODO: Rename method, update argument and hook method into UI event

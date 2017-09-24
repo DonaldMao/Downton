@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.Toast
 import com.cndownton.app.R
 import com.cndownton.app.downton.MyApplication
+import com.cndownton.app.downton.data.bean.CommonCode
 import com.cndownton.app.downton.data.bean.SMScode
 import com.cndownton.app.downton.util.CommonUtil
 import com.cndownton.app.downton.util.HMACSHA256
@@ -19,7 +20,7 @@ import com.zhy.http.okhttp.OkHttpUtils
 import com.zhy.http.okhttp.callback.StringCallback
 import okhttp3.Call
 import org.jetbrains.anko.find
-import org.jetbrains.anko.toast
+
 
 import java.lang.Exception
 
@@ -69,7 +70,7 @@ class MobileActivity : AppCompatActivity() {
         Log.i("mpf",str)
 
         OkHttpUtils
-                .get()
+                .post()
                 .url("http://www.cndownton.com/tools/app_api.ashx?action=user_mobile_bind")
                 .addParams("time",nowTime)
                 .addParams("sign", HMACSHA256.sha256_HMAC(this,str))
@@ -80,6 +81,12 @@ class MobileActivity : AppCompatActivity() {
                 .execute(object :StringCallback(){
                     override fun onResponse(response: String?, id: Int) {
                         Log.i("mpf",response)
+                        val rep=JsonUitl.stringToObject(response, CommonCode::class.java)as CommonCode
+                        Toast.makeText(this@MobileActivity,rep.msg,Toast.LENGTH_LONG).show()
+                        if(rep.status==1){
+                            finish()
+                        }
+
                     }
 
                     override fun onError(call: Call?, e: Exception?, id: Int) {

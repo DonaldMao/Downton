@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var vp_main: ViewPager
     private val mFragments: ArrayList<Fragment> = ArrayList()
 
-    private val mCheckUrl = "http://192.168.1.99/update.php"
+    private var mCheckUrl = "http://192.168.1.99/update.php"
     private var nowTime: String? = null
     private var signStr: String? = null
 
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         mIntent = intent
         MainActivityPermissionsDispatcher.getPermissionsWithCheck(this)
-//        checkUpdate()
+        checkUpdate()
         iv_home_tab = findViewById(R.id.iv_home_tab)
         vp_main = findViewById(R.id.vp_home)
 
@@ -105,6 +105,7 @@ class MainActivity : AppCompatActivity() {
 
         mFragments.add(HomeFragment())
 //        mFragments.add(MallFragment())
+
         mFragments.add(CommunityFragment())
         mFragments.add(SurroundFragment())
         mFragments.add(MeFragment())
@@ -158,7 +159,7 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
-//        initIntent(mIntent)
+
     }
 
 
@@ -215,6 +216,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkUpdate() {
+        mCheckUrl="http://www.cndownton.com/tools/app_unsign.ashx?action=get_app_version_info"
         UpdateManager.setDebuggable(true)
         UpdateManager.setWifiOnly(false)
         UpdateManager.setUrl(mCheckUrl, "main")

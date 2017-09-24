@@ -24,10 +24,12 @@ import com.cndownton.app.downton.main.MainActivity
 import com.makeramen.roundedimageview.RoundedImageView
 import com.tencent.mm.opensdk.modelmsg.SendAuth
 import org.jetbrains.anko.find
+import org.jetbrains.anko.image
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 import q.rorbin.badgeview.QBadgeView
 
+@Suppress("DEPRECATION")
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
@@ -76,6 +78,7 @@ class MeFragment : Fragment() {
 
     private lateinit var bt_login:Button
     private lateinit var weixin_login:ImageView
+    private lateinit var ib_star:ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.i("mpf","me create")
@@ -95,13 +98,14 @@ class MeFragment : Fragment() {
                 .setBadgeTextSize(16f,true)
                 .setOnDragStateChangedListener { _, _, _ -> }
         ib_message_toolbar = rootView!!.find(R.id.ib_message_toolbar)
-        QBadgeView(activity).bindTarget(ib_message_toolbar).setBadgeText("2")
-                .setBadgeTextSize(5f,true)
-                .setBadgeGravity(Gravity.CENTER )
+//        QBadgeView(activity).bindTarget(ib_message_toolbar).setBadgeText("2")
+//                .setBadgeTextSize(5f,true)
+//                .setBadgeGravity(Gravity.CENTER )
 
         tv_ID_score= rootView!!.find(R.id.tv_ID_score)
         tv_nickname= rootView!!.find(R.id.tv_nickname)
 
+        ib_star= rootView!!.find(R.id.ib_star)
         ib_setting=rootView!!.find(R.id.ib_setting)
         ib_mobile= rootView!!.find(R.id.ib_mobile)
         ib_avatar=rootView!!.find(R.id.ib_avatar)
@@ -142,9 +146,9 @@ class MeFragment : Fragment() {
         ib_avatar.setOnClickListener { toast("头像设置")  }
         ib_setting.setOnClickListener { startActivity(Intent(activity,SettingActivity::class.java))}
         ib_mobile.setOnClickListener{startActivity(Intent(activity,MobileActivity::class.java))}
-        tv_focus.setOnClickListener{toast("关注")}
-        tv_fans.setOnClickListener{toast("粉丝")}
-        tv_favorite.setOnClickListener { toast("收集") }
+//        tv_focus.setOnClickListener{toast("关注")}
+//        tv_fans.setOnClickListener{toast("粉丝")}
+//        tv_favorite.setOnClickListener { toast("收集") }
 
         ll_order.setOnClickListener{startActivity(Intent(activity,OrderActivity::class.java))}
         ll_cart.setOnClickListener{toast("购物车")}
@@ -214,6 +218,21 @@ class MeFragment : Fragment() {
         tv_nickname.setText(MyApplication.user?.nick_name)
         if(MyApplication.user?.mobile!=""){
             ib_mobile.visibility=View.GONE
+        }
+        when(MyApplication.user?.group_id){
+            1->{
+
+            }
+            in 2..6->{
+                ib_star.image=resources.getDrawable(R.drawable.bg_star_repeat)
+                ib_star.scaleType=ImageView.ScaleType.FIT_XY
+            }
+            in 7..11->{
+                ib_star.image=resources.getDrawable(R.drawable.bg_moon_repeat)
+                ib_star.scaleType=ImageView.ScaleType.FIT_XY
+
+            }
+
         }
     }
     /**
