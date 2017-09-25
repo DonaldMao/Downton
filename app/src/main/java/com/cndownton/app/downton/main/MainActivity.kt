@@ -1,6 +1,7 @@
 package com.cndownton.app.downton.main
 
 import android.Manifest
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -45,9 +46,13 @@ class MainActivity : AppCompatActivity() {
     private var signStr: String? = null
 
     private lateinit var mIntent: Intent
+
+    private lateinit var mProgress:ProgressDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        mProgress=ProgressDialog(this)
+        mProgress.show()
         mIntent = intent
         MainActivityPermissionsDispatcher.getPermissionsWithCheck(this)
         checkUpdate()

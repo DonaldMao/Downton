@@ -1,9 +1,11 @@
 package com.cndownton.app.wxapi;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +36,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
     private TextView mView;
     private String nowTime;
     private String signStr;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

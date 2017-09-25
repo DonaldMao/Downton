@@ -15,12 +15,14 @@ import android.view.ViewGroup
 import android.widget.*
 import com.bumptech.glide.Glide
 import com.cndownton.app.R
+import com.cndownton.app.downton.BaseFragment
 import com.cndownton.app.downton.MyApplication
 import com.cndownton.app.downton.customer.message.MessageActivity
 import com.cndownton.app.downton.customer.mobile.MobileActivity
 import com.cndownton.app.downton.customer.order.OrderActivity
 import com.cndownton.app.downton.customer.setting.SettingActivity
 import com.cndownton.app.downton.main.MainActivity
+import com.cndownton.app.downton.util.SharedPreferencesUtil
 import com.makeramen.roundedimageview.RoundedImageView
 import com.tencent.mm.opensdk.modelmsg.SendAuth
 import org.jetbrains.anko.find
@@ -38,7 +40,11 @@ import q.rorbin.badgeview.QBadgeView
  * Use the [MeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class MeFragment : Fragment() {
+class MeFragment : BaseFragment() {
+    override fun onBackPressed(): Boolean {
+        return true
+    }
+
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
     private var mParam2: String? = null
@@ -79,6 +85,7 @@ class MeFragment : Fragment() {
     private lateinit var bt_login:Button
     private lateinit var weixin_login:ImageView
     private lateinit var ib_star:ImageButton
+    private lateinit var bt_logout:Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.i("mpf","me create")
@@ -130,6 +137,7 @@ class MeFragment : Fragment() {
         bt_login= rootView!!.find(R.id.email_sign_in_button)
         weixin_login= rootView!!.find(R.id.weixin_login)
         vs_content= rootView!!.find(R.id.vs_content)
+        bt_logout=rootView!!.find(R.id.bt_logout)
         if(!MyApplication.isLogin){
             vs_content.showNext()
             Log.i("mpf","me showNext")
@@ -167,6 +175,11 @@ class MeFragment : Fragment() {
         bt_login.setOnClickListener{}
         weixin_login.setOnClickListener{
             wxLogin()
+        }
+        bt_logout.setOnClickListener{
+            (activity.application as MyApplication).logOut()
+            SharedPreferencesUtil(activity,"user").remove("unionid")
+            vs_content.showNext()
         }
     }
 
