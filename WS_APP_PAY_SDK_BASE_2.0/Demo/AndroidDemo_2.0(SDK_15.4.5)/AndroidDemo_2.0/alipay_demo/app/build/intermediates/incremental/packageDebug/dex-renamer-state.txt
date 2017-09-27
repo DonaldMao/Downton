@@ -1,0 +1,4 @@
+#Wed Sep 27 23:11:37 CST 2017
+base.0=D\:\\Android\\projects\\WS_APP_PAY_SDK_BASE_2.0\\Demo\\AndroidDemo_2.0(SDK_15.4.5)\\AndroidDemo_2.0\\alipay_demo\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
+renamed.0=classes.dex
+file.0=D\:\\Android\\projects\\WS_APP_PAY_SDK_BASE_2.0\\Demo\\AndroidDemo_2.0(SDK_15.4.5)\\AndroidDemo_2.0\\alipay_demo\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex

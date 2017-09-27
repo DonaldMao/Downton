@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="D:\Android\projects\WS_APP_PAY_SDK_BASE_2.0\Demo\AndroidDemo_2.0(SDK_15.4.5)\AndroidDemo_2.0\alipay_demo\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\jars\libs\internal_impl-21.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.0.0"
+        sha1="1609e6d42d0480b0f4188e2c29f75388fa12a8f0">
+        <dex dex="D:\Android\projects\WS_APP_PAY_SDK_BASE_2.0\Demo\AndroidDemo_2.0(SDK_15.4.5)\AndroidDemo_2.0\alipay_demo\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.0_2aabc42fe0bf993c5894fc95078bdae8f1e07cb4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android\projects\WS_APP_PAY_SDK_BASE_2.0\Demo\AndroidDemo_2.0(SDK_15.4.5)\AndroidDemo_2.0\alipay_demo\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.0.0"
+        sha1="686344a780033e4ba22b926cd225f8d4941247e6">
+        <dex dex="D:\Android\projects\WS_APP_PAY_SDK_BASE_2.0\Demo\AndroidDemo_2.0(SDK_15.4.5)\AndroidDemo_2.0\alipay_demo\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-21.0.0_9211495eb15cf927c56dfc286f342e5b22cae88a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android\projects\WS_APP_PAY_SDK_BASE_2.0\Demo\AndroidDemo_2.0(SDK_15.4.5)\AndroidDemo_2.0\alipay_demo\app\libs\alipaySdk-20170922.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.0.0"
+        sha1="7a534fa553c844a7ef3475eada45f5a81a170f88">
+        <dex dex="D:\Android\projects\WS_APP_PAY_SDK_BASE_2.0\Demo\AndroidDemo_2.0(SDK_15.4.5)\AndroidDemo_2.0\alipay_demo\app\build\intermediates\pre-dexed\debug\alipaySdk-20170922_6d0c6f27053612ae040d46df94bbafb847255a88.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.0\support-annotations-21.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.0.0"
+        sha1="1a578b9607b36266c63d43a4fa0ab5664dbe911e">
+        <dex dex="D:\Android\projects\WS_APP_PAY_SDK_BASE_2.0\Demo\AndroidDemo_2.0(SDK_15.4.5)\AndroidDemo_2.0\alipay_demo\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.0_942a00eae9e94bbf9436a50907fead2fcde562a3.jar" />
+    </item>
+
+</items>
