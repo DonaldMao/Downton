@@ -1,9 +1,14 @@
 package com.cndownton.app.wxapi;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -24,6 +29,8 @@ import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
+import com.uuzuche.lib_zxing.activity.CaptureActivity;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -31,11 +38,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import okhttp3.Call;
+import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.RuntimePermissions;
 
+@RuntimePermissions
 public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
     private TextView mView;
     private String nowTime;
     private String signStr;
+    private static final int REQUEST_CODE=111;
+    private String wxRespond;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +62,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
     }
 
     @Override
-    public void onResp(BaseResp baseResp) {
+    public void onResp(final BaseResp baseResp) {
         switch (baseResp.errCode){
             case BaseResp.ErrCode.ERR_AUTH_DENIED:
             case BaseResp.ErrCode.ERR_USER_CANCEL:
@@ -89,6 +101,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
                             public void onResponse(String response, int id) {
 //                                Toast.makeText(WXEntryActivity.this,response,Toast.LENGTH_LONG).show();
                                 WXUserInfo info= (WXUserInfo) JsonUitl.INSTANCE.stringToObject(response,WXUserInfo.class);
+                                wxRespond=response;
                                 SharedPreferencesUtil util= new SharedPreferencesUtil(WXEntryActivity.this,"user");
                                 nowTime= CommonUtil.INSTANCE.getCurrentTime();
                                 signStr=CommonUtil.INSTANCE.getRealShaStr("time="+nowTime,"unionid="+info.getUnionid());
@@ -100,27 +113,43 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
                                         .build().execute(new StringCallback() {
                                     @Override
                                     public void onError(Call call, Exception e, int id) {
-                                        Log.i("mpf",e.getMessage());
+                                        Log.i("mpf_e",e.getMessage());
                                     }
 
                                     @Override
                                     public void onResponse(final String response, int id) {
-                                        Log.i("mpf",response);
+                                        Log.i("mpf_resp",response);
                                         JSONObject object = null;
                                         try {
                                             object=new JSONObject(response);
-                                            if(object.getInt("status")==0){
+                                            if(object.getInt("status")!=0){
                                                 //新用户
-        
+//                                                SharedPreferencesUtil util= new SharedPreferencesUtil(WXEntryActivity.this,"user");
+//                                                if((int)util.getSharedPreference("referrer",0)==0){
+                                                    AlertDialog.Builder builder=new AlertDialog.Builder(WXEntryActivity.this);
+                                                    builder.setTitle("推荐人")
+                                                            .setMessage("未发现推荐人信息，是否马上扫描推荐人二维码")
+                                                            .setCancelable(false)
+                                                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                                    finish();
+                                                                }
+                                                            })
+                                                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                                WXEntryActivityPermissionsDispatcher.scanQrcodeWithCheck(WXEntryActivity.this);
+                                                                
+                                                                }
+                                                            }).show();
+//                                                }
+    
                                             }else {
                                                 UserInfo info= (UserInfo) JsonUitl.INSTANCE.stringToObject(object.getString("msg"),UserInfo.class);
                                                 MyApplication application= (MyApplication) getApplication();
                                                 application.logIn(info);
                                                 MyApplication.Companion.setNeedFreshMeFrag(true);
-//                                                MyApplication.Companion.removeActivity();
-//                                                Intent intent=new Intent(WXEntryActivity.this, MainActivity.class);
-//                                                intent.putExtra("login",true);
-//                                                startActivity(intent);
                                                 WXEntryActivity.this.finish();
                                             
                                             
@@ -147,5 +176,56 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
 
         }
 
+    }
+    @NeedsPermission(Manifest.permission.CAMERA)
+    public void scanQrcode(){
+        Intent intent = new Intent(WXEntryActivity.this, CaptureActivity.class);
+        startActivityForResult(intent, REQUEST_CODE);
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        WXEntryActivityPermissionsDispatcher.onRequestPermissionsResult(this,requestCode,grantResults);
+    }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE) {
+            //处理扫描结果（在界面上显示）
+            if (null != data) {
+                Bundle bundle = data.getExtras();
+                if (bundle == null) {
+                    return;
+                }
+                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                    String result = bundle.getString(CodeUtils.RESULT_STRING);
+                    SharedPreferencesUtil util= new SharedPreferencesUtil(WXEntryActivity.this,"user");
+                    util.put("referrer", result);
+                    Toast.makeText(this, "成功获取推荐人信息", Toast.LENGTH_LONG).show();
+                    signIn(result);
+                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                    Toast.makeText(this, "解析二维码失败", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+    }
+    
+    private void signIn(String referrer ){
+        OkHttpUtils.post().url("http://www.cndownton.com/tools/app_api.ashx?action=user_oauth_register")
+                .addParams("oauth_name","weixin_app")
+                .addParams("boss_id",referrer)
+                .addParams("userinfo",wxRespond)
+                
+                .build().execute(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+        
+            }
+    
+            @Override
+            public void onResponse(String response, int id) {
+        
+            }
+        });
     }
 }

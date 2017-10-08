@@ -1,10 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.cndownton.app.downton.customer.upgrade.UpgradeActivity">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-</android.support.constraint.ConstraintLayout>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_update"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:titleTextColor="@android:color/white"/>
+    </android.support.design.widget.AppBarLayout>
+    <TextView
+        android:id="@+id/tv_desc"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:background="@drawable/bg_edittext_black"
+        android:layout_margin="16dp"
+        android:text="您现在是五星星级会员"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:gravity="center"
+        />
+    <LinearLayout
+        android:id="@+id/ll_star"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_margin="16dp"
+        >
+        <ImageView
+            android:layout_width="72dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/star"
+            />
+        <TextView
+            android:id="@+id/tv_update_star_desc"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_edittext_black"
+            android:text="成为星星级会员"
+            android:textColor="@color/white_second_text_0.7"
+            android:textSize="20sp"
+            android:gravity="center"
+            />
+        <TextView
+            android:id="@+id/tv_update_star"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_edittext_black"
+            android:text="￥50"
+            android:textColor="@color/white_second_text_0.7"
+            android:textSize="24sp"
+            android:gravity="center"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_moon"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_margin="16dp"
+        >
+        <ImageView
+            android:layout_width="72dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/moon2"
+            />
+
+        <TextView
+            android:id="@+id/tv_update_moon_desc"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_edittext_black"
+            android:gravity="center"
+            android:text="成为月亮级会员"
+            android:textColor="@color/white_second_text_0.7"
+            android:textSize="20sp"
+            />
+        <TextView
+            android:id="@+id/tv_update_moon"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_edittext_black"
+            android:text="￥150"
+            android:textColor="@color/white_second_text_0.7"
+            android:textSize="24sp"
+            android:gravity="center"
+            />
+    </LinearLayout>
+
+</LinearLayout>

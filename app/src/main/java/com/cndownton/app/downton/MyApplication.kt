@@ -5,6 +5,7 @@ import android.app.Application
 import com.cndownton.app.downton.data.bean.UserInfo
 import com.tencent.mm.opensdk.openapi.IWXAPI
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
+import com.uuzuche.lib_zxing.activity.ZXingLibrary
 import permissions.dispatcher.RuntimePermissions
 import com.zhy.http.okhttp.OkHttpUtils
 import okhttp3.OkHttpClient
@@ -51,6 +52,7 @@ class MyApplication : Application() {
         super.onCreate()
         regToWx()
         initOkHttp()
+        ZXingLibrary.initDisplayOpinion(this)
     }
     //初始化OkHttp
     private fun initOkHttp() {

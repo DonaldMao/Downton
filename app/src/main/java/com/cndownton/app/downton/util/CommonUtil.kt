@@ -15,6 +15,10 @@ object CommonUtil {
         val format = SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault())
         return format.format(System.currentTimeMillis())
     }
+    fun getCurrentTime2(): String {
+        val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        return format.format(System.currentTimeMillis())
+    }
     fun getAssetsFile(context: Context):String{
         try {
             val inputReader = InputStreamReader(context.resources.assets.open("ShaKey"))

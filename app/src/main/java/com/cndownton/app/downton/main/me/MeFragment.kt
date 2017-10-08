@@ -20,7 +20,9 @@ import com.cndownton.app.downton.MyApplication
 import com.cndownton.app.downton.customer.message.MessageActivity
 import com.cndownton.app.downton.customer.mobile.MobileActivity
 import com.cndownton.app.downton.customer.order.OrderActivity
+import com.cndownton.app.downton.customer.qrcode.QrcodeActivity
 import com.cndownton.app.downton.customer.setting.SettingActivity
+import com.cndownton.app.downton.customer.upgrade.UpgradeActivity
 import com.cndownton.app.downton.main.MainActivity
 import com.cndownton.app.downton.util.SharedPreferencesUtil
 import com.makeramen.roundedimageview.RoundedImageView
@@ -66,6 +68,7 @@ class MeFragment : BaseFragment() {
     private lateinit var tv_fans:TextView
     private lateinit var tv_favorite:TextView
 
+    private lateinit var ll_upgrade:LinearLayout
     private lateinit var ll_order:LinearLayout
     private lateinit var ll_cart:LinearLayout
     private lateinit var ll_surround:LinearLayout
@@ -120,6 +123,7 @@ class MeFragment : BaseFragment() {
         tv_fans=rootView!!.find(R.id.tv_fans)
         tv_favorite=rootView!!.find(R.id.tv_favorite)
 
+        ll_upgrade=rootView!!.find(R.id.ll_upgrade)
         ll_order=rootView!!.find(R.id.ll_order)
         ll_cart=rootView!!.find(R.id.ll_cart)
         ll_surround=rootView!!.find(R.id.ll_surround)
@@ -158,6 +162,7 @@ class MeFragment : BaseFragment() {
 //        tv_fans.setOnClickListener{toast("粉丝")}
 //        tv_favorite.setOnClickListener { toast("收集") }
 
+        ll_upgrade.setOnClickListener { startActivity(Intent(activity, UpgradeActivity::class.java)) }
         ll_order.setOnClickListener{startActivity(Intent(activity,OrderActivity::class.java))}
         ll_cart.setOnClickListener{toast("购物车")}
         ll_surround.setOnClickListener{toast("周边")}
@@ -169,7 +174,7 @@ class MeFragment : BaseFragment() {
 
         ll_team.setOnClickListener{toast("团队")}
         ll_friend.setOnClickListener{toast("好友")}
-        ll_invite.setOnClickListener{toast("邀请")}
+        ll_invite.setOnClickListener{startActivity(Intent(activity,QrcodeActivity::class.java))}
         ll_zone.setOnClickListener{toast("地区")}
 
         bt_login.setOnClickListener{}

@@ -38,6 +38,7 @@ android {
             signingConfig signingConfigs.debugConfig
         }
         release {
+//            shrinkResources true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -68,7 +69,7 @@ dependencies {
     implementation 'com.jaredrummler:material-spinner:1.1.0'
     implementation 'com.github.chihane:JDAddressSelector:1.1.4'
     implementation 'com.github.delight-im:Android-AdvancedWebView:v3.0.0'
-
+    implementation 'cn.yipianfengye.android:zxing-library:2.2'
     kapt 'com.github.bumptech.glide:compiler:4.1.1'
     // Anko Commons
     compile "org.jetbrains.anko:anko-commons:$anko_version"
@@ -93,4 +94,5 @@ dependencies {
     }
     kapt 'com.github.hotchemi:permissionsdispatcher-processor:2.4.0'
     implementation 'com.makeramen:roundedimageview:2.3.0'
+    implementation files('libs/alipaySdk-20170922.jar')
 }

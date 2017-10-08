@@ -47,12 +47,10 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mIntent: Intent
 
-    private lateinit var mProgress:ProgressDialog
+//    private lateinit var mProgress:ProgressDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        mProgress=ProgressDialog(this)
-        mProgress.show()
         mIntent = intent
         MainActivityPermissionsDispatcher.getPermissionsWithCheck(this)
         checkUpdate()

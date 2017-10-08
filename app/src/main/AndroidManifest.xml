@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.cndownton.app">
-    //weixin接入
+
+    <!-- weixin接入 -->
+    <!-- alipay -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:name=".downton.MyApplication"
@@ -16,9 +21,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".downton.main.MainActivity"
-                  android:windowSoftInputMode="adjustPan"
-            >
+        <activity
+            android:name=".downton.main.MainActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -29,9 +34,24 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".downton.main.MainActivity"/>
         </activity>
-        <activity android:name=".downton.customer.setting.SettingActivity"
-                  android:windowSoftInputMode="stateHidden|stateAlwaysHidden"
-            >
+        <activity
+            android:name=".downton.customer.setting.SettingActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden">
+        </activity>
+        <!-- 支付宝相关 -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden">
+        </activity>
+        <activity
+            android:name="com.alipay.sdk.app.H5AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden">
         </activity>
         <activity
             android:name=".wxapi.WXEntryActivity"
@@ -43,6 +63,11 @@
         <activity android:name=".downton.customer.mobile.MobileActivity">
         </activity>
         <activity android:name=".downton.customer.order.OrderActivity">
+        </activity>
+        <activity android:name=".downton.customer.upgrade.UpgradeActivity">
+        </activity>
+        <activity android:name=".downton.customer.qrcode.QrcodeActivity"
+            >
         </activity>
     </application>
 
