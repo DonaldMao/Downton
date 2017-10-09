@@ -122,7 +122,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
                                         JSONObject object = null;
                                         try {
                                             object=new JSONObject(response);
-                                            if(object.getInt("status")!=0){
+                                            if(object.getInt("status")==0){
                                                 //新用户
 //                                                SharedPreferencesUtil util= new SharedPreferencesUtil(WXEntryActivity.this,"user");
 //                                                if((int)util.getSharedPreference("referrer",0)==0){
@@ -211,11 +211,15 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
     }
     
     private void signIn(String referrer ){
+        String nowTime= CommonUtil.INSTANCE.getCurrentTime();
+        String signStr=CommonUtil.INSTANCE.getRealShaStr("time="+nowTime,"oauth_name=weixin_app","boss_id="+referrer,"userinfo="+wxRespond);
+    
+    
         OkHttpUtils.post().url("http://www.cndownton.com/tools/app_api.ashx?action=user_oauth_register")
                 .addParams("oauth_name","weixin_app")
                 .addParams("boss_id",referrer)
                 .addParams("userinfo",wxRespond)
-                
+                .addParams("sign",HMACSHA256.INSTANCE.sha256_HMAC(WXEntryActivity.this,signStr))
                 .build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
@@ -224,7 +228,44 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
     
             @Override
             public void onResponse(String response, int id) {
+                try {
+                    JSONObject object=new JSONObject(response);
+                    if(object.getInt("status")==1){
+                        SharedPreferencesUtil util= new SharedPreferencesUtil(WXEntryActivity.this,"user");
+                        String unionId= (String) util.getSharedPreference("unionid","0");
+                        String nowTime= CommonUtil.INSTANCE.getCurrentTime();
+                        String signStr=CommonUtil.INSTANCE.getRealShaStr("time="+nowTime,"unionid="+unionId);
+                        
+                        OkHttpUtils.post().url("http://www.cndownton.com/tools/app_api.ashx?action=user_login_weixin_unionid")
+                                .addParams("time",nowTime).addParams("unionid",unionId).addParams("sign", HMACSHA256.INSTANCE.sha256_HMAC(WXEntryActivity.this,signStr))
+                                .build().execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
         
+                            }
+    
+                            @Override
+                            public void onResponse(String response, int id) {
+                                try {
+                                    JSONObject object = new JSONObject(response);
+                                    UserInfo info = (UserInfo) JsonUitl.INSTANCE.stringToObject(object.getString("msg"), UserInfo.class);
+                                    MyApplication application = (MyApplication) getApplication();
+                                    application.logIn(info);
+                                    MyApplication.Companion.setNeedFreshMeFrag(true);
+                                    WXEntryActivity.this.finish();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        
+                    }else if(object.getInt("status")==0){
+                        Toast.makeText(WXEntryActivity.this,object.getString("msg"),Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+    
             }
         });
     }
