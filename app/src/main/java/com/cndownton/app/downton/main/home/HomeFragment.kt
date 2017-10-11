@@ -66,6 +66,7 @@ class HomeFragment : BaseFragment(), AdvancedWebView.Listener {
         // Inflate the layout for this fragment
         val view=inflater!!.inflate(R.layout.fragment_home, container, false)
         wv_home= view.find(R.id.wv_home)
+        wv_home.settings.userAgentString=wv_home.settings.userAgentString.replace("Android","DT_Tang_iOS_For_WebView",true)
         wv_home.loadUrl("http://www.cndownton.com/index.html")
         toolbar=view.find(R.id.toolbar_home)
         toolbar.title=""

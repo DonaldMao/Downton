@@ -215,6 +215,7 @@
                     android:layout_height="56dp"
                     android:background="@android:color/white"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     >
 
                     <ImageView
@@ -261,6 +262,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#cecece"
+                    android:visibility="gone"
+
                     />
 
                 <LinearLayout
@@ -269,6 +272,8 @@
                     android:layout_height="56dp"
                     android:background="@android:color/white"
                     android:orientation="horizontal"
+                    android:visibility="gone"
+
                     >
 
                     <ImageView
@@ -312,6 +317,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#cecece"
+                    android:visibility="gone"
+
                     />
 
                 <LinearLayout
@@ -320,6 +327,8 @@
                     android:layout_height="56dp"
                     android:background="@android:color/white"
                     android:orientation="horizontal"
+                    android:visibility="gone"
+
                     >
 
                     <ImageView
@@ -360,6 +369,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#cecece"
+                    android:visibility="gone"
+
                     />
 
                 <LinearLayout
@@ -369,6 +380,8 @@
                     android:layout_marginBottom="16dp"
                     android:background="@android:color/white"
                     android:orientation="horizontal"
+                    android:visibility="gone"
+
                     >
 
                     <ImageView
@@ -411,6 +424,8 @@
                     android:layout_height="56dp"
                     android:background="@android:color/white"
                     android:orientation="horizontal"
+                    android:visibility="gone"
+
                     >
 
                     <ImageView
@@ -451,6 +466,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#cecece"
+                    android:visibility="gone"
+
                     />
 
                 <LinearLayout
@@ -459,6 +476,8 @@
                     android:layout_height="56dp"
                     android:background="@android:color/white"
                     android:orientation="horizontal"
+                    android:visibility="gone"
+
                     >
 
                     <ImageView
@@ -498,6 +517,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#cecece"
+                    android:visibility="gone"
+
                     />
 
                 <LinearLayout
@@ -507,6 +528,8 @@
                     android:background="@android:color/white"
                     android:orientation="horizontal"
                     android:layout_marginBottom="16dp"
+                    android:visibility="gone"
+
                     >
 
                     <ImageView
@@ -547,6 +570,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#cecece"
+                    android:visibility="gone"
+
                     />
 
                 <LinearLayout
@@ -555,6 +580,8 @@
                     android:layout_height="56dp"
                     android:background="@android:color/white"
                     android:orientation="horizontal"
+                    android:visibility="gone"
+
                     >
 
                     <ImageView
@@ -594,6 +621,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#cecece"
+                    android:visibility="gone"
+
                     />
 
                 <LinearLayout
@@ -602,6 +631,8 @@
                     android:layout_height="56dp"
                     android:background="@android:color/white"
                     android:orientation="horizontal"
+                    android:visibility="gone"
+
                     >
 
                     <ImageView
@@ -641,6 +672,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#cecece"
+                    android:visibility="gone"
+
                     />
 
                 <LinearLayout
@@ -664,7 +697,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="8dp"
-                        android:text="邀请好友"
+                        android:text="我的二维码"
                         style="@style/font_user_center"
                         />
 
@@ -702,6 +735,8 @@
                     android:layout_height="56dp"
                     android:background="@android:color/white"
                     android:orientation="horizontal"
+                    android:visibility="gone"
+
                     >
 
                     <ImageView

@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.cndownton.app.R
 import com.cndownton.app.downton.MyApplication
@@ -30,6 +31,7 @@ class MobileActivity : AppCompatActivity() {
     private lateinit var bt_confirm:Button
     private lateinit var et_phonenumber:EditText
     private lateinit var et_verificationcode:EditText
+    private lateinit var tv_binded:TextView
     private lateinit var phoneNumber:String
     private lateinit var verificationCode:String
     private lateinit var nowTime:String
@@ -60,6 +62,11 @@ class MobileActivity : AppCompatActivity() {
         }
         et_phonenumber=find(R.id.et_phonenumber)
         et_verificationcode=find(R.id.et_verificationcode)
+
+        tv_binded=find(R.id.tv_binded)
+        if(MyApplication.user?.mobile!=""){
+            tv_binded.text="当前已绑定手机号码${MyApplication.user?.mobile}！"
+        }
 
     }
 

@@ -69,6 +69,8 @@ class SurroundFragment : BaseFragment(),AdvancedWebView.Listener {
         val view=inflater!!.inflate(R.layout.fragment_surround, container, false)
         mWebView=view.find(R.id.wv_surround)
         mWebView.setListener(activity,this)
+        mWebView.settings.userAgentString=mWebView.settings.userAgentString.replace("Android","DT_Tang_iOS_For_WebView",true)
+
         mWebView.loadUrl("http://www.cndownton.com/shop_list_new.html")
         toolbar=view.find(R.id.toolbar_surround)
         toolbar.title=""

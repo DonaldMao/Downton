@@ -71,6 +71,7 @@ class CommunityFragment : BaseFragment(),AdvancedWebView.Listener {
         toolbar=view.findViewById(R.id.toolbar_community)
         toolbar.title=""
         mWebView=view.find(R.id.wv_community)
+        mWebView.settings.userAgentString=mWebView.settings.userAgentString.replace("Android","DT_Tang_iOS_For_WebView",true)
         mWebView.loadUrl("http://www.cndownton.com/community/64.html")
         mActivity= activity as AppCompatActivity?
         mActivity?.setSupportActionBar(toolbar)

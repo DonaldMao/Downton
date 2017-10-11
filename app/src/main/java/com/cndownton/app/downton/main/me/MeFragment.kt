@@ -234,9 +234,9 @@ class MeFragment : BaseFragment() {
         Glide.with(activity).load(MyApplication.user?.avatar).into(ib_avatar)
         tv_ID_score.setText("编号：${MyApplication.user?.user_name} 积分：${MyApplication.user?.point} 金豆：${MyApplication.user?.coin}")
         tv_nickname.setText(MyApplication.user?.nick_name)
-        if(MyApplication.user?.mobile!=""){
-            ib_mobile.visibility=View.GONE
-        }
+//        if(MyApplication.user?.mobile!=""){
+//            ib_mobile.visibility=View.GONE
+//        }
         when(MyApplication.user?.group_id){
             1->{
 
