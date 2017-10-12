@@ -89,6 +89,9 @@ class MeFragment : BaseFragment() {
     private lateinit var weixin_login:ImageView
     private lateinit var ib_star:ImageButton
     private lateinit var bt_logout:Button
+
+    private lateinit var userName:String
+    private lateinit var passWord:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.i("mpf","me create")
@@ -177,7 +180,9 @@ class MeFragment : BaseFragment() {
         ll_invite.setOnClickListener{startActivity(Intent(activity,QrcodeActivity::class.java))}
         ll_zone.setOnClickListener{toast("地区")}
 
-        bt_login.setOnClickListener{}
+        bt_login.setOnClickListener{
+            login()
+        }
         weixin_login.setOnClickListener{
             wxLogin()
         }
@@ -186,6 +191,10 @@ class MeFragment : BaseFragment() {
             SharedPreferencesUtil(activity,"user").remove("unionid")
             vs_content.showNext()
         }
+    }
+
+    private fun login() {
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

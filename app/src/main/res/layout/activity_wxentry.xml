@@ -7,5 +7,10 @@
     android:layout_height="match_parent"
     android:background="@color/transparent"
     tools:context="com.cndownton.app.wxapi.WXEntryActivity">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/et_wx"
+        />
 
 </android.support.constraint.ConstraintLayout>
