@@ -50,7 +50,6 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
     private static final int REQUEST_CODE=111;
     private String wxRespond;
     private EditText et_wx;
-    private String uId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,14 +83,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
     
                     @Override
                     public void onResponse(String response, int id) {
-//                        Toast.makeText(WXEntryActivity.this,"1",Toast.LENGTH_LONG).show();
                         Access_tokenCode code= (Access_tokenCode) JsonUitl.INSTANCE.stringToObject(response,Access_tokenCode.class);
-//                        SharedPreferencesUtil util =new SharedPreferencesUtil(WXEntryActivity.this,"data_wx");
-//                        util.put("token",code.getAccess_token());
-//                        util.put("refreshToken",code.getRefresh_token());
-//                        util.put("expires",code.getExpires_in());
-
-
                         String userInfoUrl="https://api.weixin.qq.com/sns/userinfo?access_token="+code.getAccess_token()
                                 +"&openid="+code.getOpenid();
                         OkHttpUtils.get().url(userInfoUrl).build().execute(new StringCallback() {
@@ -108,10 +100,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
                                 SharedPreferencesUtil util= new SharedPreferencesUtil(WXEntryActivity.this,"user");
                                 nowTime= CommonUtil.INSTANCE.getCurrentTime();
                                 signStr=CommonUtil.INSTANCE.getRealShaStr("time="+nowTime,"unionid="+info.getUnionid());
-
-
                                 util.put("unionid",info.getUnionid());
-                                uId=info.getUnionid();
                                 OkHttpUtils.post().url("http://www.cndownton.com/tools/app_api.ashx?action=user_login_weixin_unionid")
                                     .addParams("time",nowTime).addParams("unionid",info.getUnionid()).addParams("sign", HMACSHA256.INSTANCE.sha256_HMAC(WXEntryActivity.this,signStr))
                                         .build().execute(new StringCallback() {
@@ -119,17 +108,14 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
                                     public void onError(Call call, Exception e, int id) {
                                         Log.i("mpf_e",e.getMessage());
                                     }
-
                                     @Override
                                     public void onResponse(final String response, int id) {
                                         Log.i("mpf_resp",response);
                                         JSONObject object = null;
                                         try {
                                             object=new JSONObject(response);
-                                            if(object.getInt("status")==0){
+                                            if(object.getInt("status")!=0){
                                                 //新用户
-//                                                SharedPreferencesUtil util= new SharedPreferencesUtil(WXEntryActivity.this,"user");
-//                                                if((int)util.getSharedPreference("referrer",0)==0){
                                                     AlertDialog.Builder builder=new AlertDialog.Builder(WXEntryActivity.this);
                                                     builder.setTitle("推荐人")
                                                             .setMessage("未发现推荐人信息，是否马上扫描推荐人二维码")
@@ -216,14 +202,8 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
     
     private void signIn(String referrer){
         String nowTime= CommonUtil.INSTANCE.getCurrentTime();
-//        new AlertDialog.Builder(this)
-//                .setMessage(wxRespond).show();
-//        wxRespond="{"+"\"subscribe\": 1,"+wxRespond.substring(1);
-  
-        String signStr=CommonUtil.INSTANCE.getRealShaStr("time="+nowTime,"oauth_name=weixin_app","boss_id="+referrer,"userinfo="+wxRespond);
-        et_wx.setText(signStr);
-//                new AlertDialog.Builder(this)
-//                .setMessage(CommonUtil.INSTANCE.getRealShaStr("time="+nowTime,"oauth_name=weixin_app","boss_id="+referrer,"userinfo="+wxRespond)).show();
+//        wxRespond="{\"openid\":\"ovicHwN_fuKdyL98RNuEiK8F38QM\",\"nickname\":\"赑屓2\",\"sex\":1,\"language\":\"zh_CN\",\"city\":\"Jinhua\",\"province\":\"Zhejiang\",\"country\":\"CN\",\"headimgurl\":\"http:\\/\\/wx.qlogo.cn\\/mmopen\\/vi_32\\/Q0j4TwGTfTJFjGfU3z2Qv4E58Cf1eic1RPnhz8RuOSkP2Tse1WCFegRvdrLvqaN6TElt2OOeKBratmLId8sz8IA\\/0\",\"privilege\":[],\"unionid\":\"oR4uiweS1E5ds5jTBudJdvvFZo-A\"}";
+        String signStr=CommonUtil.INSTANCE.getRealShaStr("time="+nowTime,"oauth_name=weixin","boss_id="+referrer,"userinfo="+wxRespond);
         OkHttpUtils.post().url("http://www.cndownton.com/tools/app_api.ashx?action=user_oauth_register")
                 .addParams("oauth_name","weixin")
                 .addParams("boss_id",referrer)
@@ -234,23 +214,23 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
             @Override
             public void onError(Call call, Exception e, int id) {
                 Toast.makeText(WXEntryActivity.this,"0"+e.getMessage(),Toast.LENGTH_LONG).show();
-    
             }
     
             @Override
             public void onResponse(String response, int id) {
                 try {
-                    Toast.makeText(WXEntryActivity.this,"1"+response,Toast.LENGTH_LONG).show();
+//                    Toast.makeText(WXEntryActivity.this,"1"+response,Toast.LENGTH_LONG).show();
                     JSONObject object=new JSONObject(response);
                     if(object.getInt("status")==1){
-//                        SharedPreferencesUtil util= new SharedPreferencesUtil(WXEntryActivity.this,"user");
-//                        String unionId= (String) util.getSharedPreference("unionid","0");
-                        
+                        SharedPreferencesUtil util= new SharedPreferencesUtil(WXEntryActivity.this,"user");
+                        String unionId= (String) util.getSharedPreference("unionid","0");
+//                        unionId="oR4uiweS1E5ds5jTBudJdvvFZo-A";
+
                         String nowTime= CommonUtil.INSTANCE.getCurrentTime();
-                        String signStr=CommonUtil.INSTANCE.getRealShaStr("time="+nowTime,"unionid="+uId);
-                        Toast.makeText(WXEntryActivity.this,"2"+uId,Toast.LENGTH_LONG).show();
+                        String signStr=CommonUtil.INSTANCE.getRealShaStr("time="+nowTime,"unionid="+unionId);
+//                        Toast.makeText(WXEntryActivity.this,"2"+uId,Toast.LENGTH_LONG).show();
                         OkHttpUtils.post().url("http://www.cndownton.com/tools/app_api.ashx?action=user_login_weixin_unionid")
-                                .addParams("time",nowTime).addParams("unionid",uId).addParams("sign", HMACSHA256.INSTANCE.sha256_HMAC(WXEntryActivity.this,signStr))
+                                .addParams("time",nowTime).addParams("unionid",unionId).addParams("sign", HMACSHA256.INSTANCE.sha256_HMAC(WXEntryActivity.this,signStr))
                                 .build().execute(new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int id) {
@@ -261,16 +241,16 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
                             public void onResponse(String response, int id) {
                                 Toast.makeText(WXEntryActivity.this,"4"+response,Toast.LENGTH_LONG).show();
     
-//                                try {
-//                                    JSONObject object = new JSONObject(response);
-//                                    UserInfo info = (UserInfo) JsonUitl.INSTANCE.stringToObject(object.getString("msg"), UserInfo.class);
-//                                    MyApplication application = (MyApplication) getApplication();
-//                                    application.logIn(info);
-//                                    MyApplication.Companion.setNeedFreshMeFrag(true);
-//                                    WXEntryActivity.this.finish();
-//                                } catch (JSONException e) {
-//                                    e.printStackTrace();
-//                                }
+                                try {
+                                    JSONObject object = new JSONObject(response);
+                                    UserInfo info = (UserInfo) JsonUitl.INSTANCE.stringToObject(object.getString("msg"), UserInfo.class);
+                                    MyApplication application = (MyApplication) getApplication();
+                                    application.logIn(info);
+                                    MyApplication.Companion.setNeedFreshMeFrag(true);
+                                    WXEntryActivity.this.finish();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         });
                         

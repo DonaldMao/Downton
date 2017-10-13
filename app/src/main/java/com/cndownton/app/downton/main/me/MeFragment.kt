@@ -24,14 +24,21 @@ import com.cndownton.app.downton.customer.qrcode.QrcodeActivity
 import com.cndownton.app.downton.customer.setting.SettingActivity
 import com.cndownton.app.downton.customer.upgrade.UpgradeActivity
 import com.cndownton.app.downton.main.MainActivity
+import com.cndownton.app.downton.util.CommonUtil
+import com.cndownton.app.downton.util.HMACSHA256
 import com.cndownton.app.downton.util.SharedPreferencesUtil
 import com.makeramen.roundedimageview.RoundedImageView
 import com.tencent.mm.opensdk.modelmsg.SendAuth
+import com.zhy.http.okhttp.OkHttpUtils
+import com.zhy.http.okhttp.callback.StringCallback
+import okhttp3.Call
 import org.jetbrains.anko.find
 import org.jetbrains.anko.image
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
+import org.json.JSONObject
 import q.rorbin.badgeview.QBadgeView
+import java.lang.Exception
 
 @Suppress("DEPRECATION")
 /**
@@ -90,6 +97,8 @@ class MeFragment : BaseFragment() {
     private lateinit var ib_star:ImageButton
     private lateinit var bt_logout:Button
 
+    private lateinit var et_username:AutoCompleteTextView
+    private lateinit var et_password:EditText
     private lateinit var userName:String
     private lateinit var passWord:String
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -153,6 +162,11 @@ class MeFragment : BaseFragment() {
             Log.i("mpf","me refreshView")
         }
 
+        et_username=rootView!!.find(R.id.username)
+        et_password=rootView!!.find(R.id.password)
+
+
+
         return rootView
     }
 
@@ -188,12 +202,47 @@ class MeFragment : BaseFragment() {
         }
         bt_logout.setOnClickListener{
             (activity.application as MyApplication).logOut()
-            SharedPreferencesUtil(activity,"user").remove("unionid")
+            SharedPreferencesUtil(activity,"user").clear()
             vs_content.showNext()
+
+
         }
     }
 
     private fun login() {
+        userName=et_username.text.toString()
+        passWord=et_password.text.toString()
+        if (userName==""||passWord==""){
+            toast("用户名或者密码不能为空")
+            return
+        }
+        val nowTime=CommonUtil.getCurrentTime()
+        val signStr = CommonUtil.getRealShaStr("time=" + nowTime,"txtUserName="+userName,"txtPassword="+passWord)
+        OkHttpUtils.post().url("http://www.cndownton.com/tools/app_api.ashx?action=user_login")
+                .addParams("txtUserName",userName)
+                .addParams("txtPassword",passWord)
+                .addParams("time",nowTime)
+                .addParams("sign",HMACSHA256.sha256_HMAC(activity,signStr))
+                .build()
+                .execute(object :StringCallback(){
+                    override fun onResponse(response: String?, id: Int) {
+                        val jsonO=JSONObject(response)
+                        if(jsonO.getInt("status")==0){
+                            toast(jsonO.getString("msg"))
+                        }else if (jsonO.getInt("status")==1){
+                            toast(jsonO.getString("msg"))
+                            SharedPreferencesUtil(activity,"user").put("userid",jsonO.getInt("user_id"))
+
+                        }
+
+
+                    }
+
+                    override fun onError(call: Call?, e: Exception?, id: Int) {
+                        toast(e?.message!!)
+                    }
+
+                })
 
     }
 
