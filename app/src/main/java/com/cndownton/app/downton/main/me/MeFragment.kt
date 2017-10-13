@@ -63,47 +63,47 @@ class MeFragment : BaseFragment() {
     private var rootView: View? = null
     private lateinit var mBadgeviewContainer: View
 
-    private lateinit var tv_ID_score:TextView
-    private lateinit var tv_nickname:TextView
+    private lateinit var tv_ID_score: TextView
+    private lateinit var tv_nickname: TextView
 
 
     private lateinit var ib_message_toolbar: ImageButton
-    private lateinit var ib_setting:ImageButton
-    private lateinit var ib_mobile:ImageButton
+    private lateinit var ib_setting: ImageButton
+    private lateinit var ib_mobile: ImageButton
     private lateinit var ib_avatar: RoundedImageView
-    private lateinit var tv_focus:TextView
-    private lateinit var tv_fans:TextView
-    private lateinit var tv_favorite:TextView
+    private lateinit var tv_focus: TextView
+    private lateinit var tv_fans: TextView
+    private lateinit var tv_favorite: TextView
 
-    private lateinit var ll_upgrade:LinearLayout
-    private lateinit var ll_order:LinearLayout
-    private lateinit var ll_cart:LinearLayout
-    private lateinit var ll_surround:LinearLayout
-    private lateinit var ll_shop:LinearLayout
+    private lateinit var ll_upgrade: LinearLayout
+    private lateinit var ll_order: LinearLayout
+    private lateinit var ll_cart: LinearLayout
+    private lateinit var ll_surround: LinearLayout
+    private lateinit var ll_shop: LinearLayout
 
-    private lateinit var ll_bill:LinearLayout
-    private lateinit var ll_wallet:LinearLayout
-    private lateinit var ll_card:LinearLayout
+    private lateinit var ll_bill: LinearLayout
+    private lateinit var ll_wallet: LinearLayout
+    private lateinit var ll_card: LinearLayout
 
-    private lateinit var ll_team:LinearLayout
-    private lateinit var ll_friend:LinearLayout
-    private lateinit var ll_invite:LinearLayout
-    private lateinit var ll_zone:LinearLayout
+    private lateinit var ll_team: LinearLayout
+    private lateinit var ll_friend: LinearLayout
+    private lateinit var ll_invite: LinearLayout
+    private lateinit var ll_zone: LinearLayout
 
-    private lateinit var vs_content:ViewSwitcher
+    private lateinit var vs_content: ViewSwitcher
 
-    private lateinit var bt_login:Button
-    private lateinit var weixin_login:ImageView
-    private lateinit var ib_star:ImageButton
-    private lateinit var bt_logout:Button
+    private lateinit var bt_login: Button
+    private lateinit var weixin_login: ImageView
+    private lateinit var ib_star: ImageButton
+    private lateinit var bt_logout: Button
 
-    private lateinit var et_username:AutoCompleteTextView
-    private lateinit var et_password:EditText
-    private lateinit var userName:String
-    private lateinit var passWord:String
+    private lateinit var et_username: AutoCompleteTextView
+    private lateinit var et_password: EditText
+    private lateinit var userName: String
+    private lateinit var passWord: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.i("mpf","me create")
+        Log.i("mpf", "me create")
         if (arguments != null) {
             mParam1 = arguments.getString(ARG_PARAM1)
             mParam2 = arguments.getString(ARG_PARAM2)
@@ -112,58 +112,58 @@ class MeFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        Log.i("mpf","me onCreateView")
+        Log.i("mpf", "me onCreateView")
         rootView = inflater!!.inflate(R.layout.fragment_me, container, false)
         mBadgeviewContainer = rootView!!.find(R.id.badgeview_container)
         QBadgeView(activity).bindTarget(mBadgeviewContainer).setBadgeNumber(6)
-                .setBadgeGravity(Gravity.CENTER or  Gravity.END)
-                .setBadgeTextSize(16f,true)
+                .setBadgeGravity(Gravity.CENTER or Gravity.END)
+                .setBadgeTextSize(16f, true)
                 .setOnDragStateChangedListener { _, _, _ -> }
         ib_message_toolbar = rootView!!.find(R.id.ib_message_toolbar)
 //        QBadgeView(activity).bindTarget(ib_message_toolbar).setBadgeText("2")
 //                .setBadgeTextSize(5f,true)
 //                .setBadgeGravity(Gravity.CENTER )
 
-        tv_ID_score= rootView!!.find(R.id.tv_ID_score)
-        tv_nickname= rootView!!.find(R.id.tv_nickname)
+        tv_ID_score = rootView!!.find(R.id.tv_ID_score)
+        tv_nickname = rootView!!.find(R.id.tv_nickname)
 
-        ib_star= rootView!!.find(R.id.ib_star)
-        ib_setting=rootView!!.find(R.id.ib_setting)
-        ib_mobile= rootView!!.find(R.id.ib_mobile)
-        ib_avatar=rootView!!.find(R.id.ib_avatar)
-        tv_focus=rootView!!.find(R.id.tv_focus)
-        tv_fans=rootView!!.find(R.id.tv_fans)
-        tv_favorite=rootView!!.find(R.id.tv_favorite)
+        ib_star = rootView!!.find(R.id.ib_star)
+        ib_setting = rootView!!.find(R.id.ib_setting)
+        ib_mobile = rootView!!.find(R.id.ib_mobile)
+        ib_avatar = rootView!!.find(R.id.ib_avatar)
+        tv_focus = rootView!!.find(R.id.tv_focus)
+        tv_fans = rootView!!.find(R.id.tv_fans)
+        tv_favorite = rootView!!.find(R.id.tv_favorite)
 
-        ll_upgrade=rootView!!.find(R.id.ll_upgrade)
-        ll_order=rootView!!.find(R.id.ll_order)
-        ll_cart=rootView!!.find(R.id.ll_cart)
-        ll_surround=rootView!!.find(R.id.ll_surround)
-        ll_shop=rootView!!.find(R.id.ll_shop)
+        ll_upgrade = rootView!!.find(R.id.ll_upgrade)
+        ll_order = rootView!!.find(R.id.ll_order)
+        ll_cart = rootView!!.find(R.id.ll_cart)
+        ll_surround = rootView!!.find(R.id.ll_surround)
+        ll_shop = rootView!!.find(R.id.ll_shop)
 
-        ll_bill=rootView!!.find(R.id.ll_bill)
-        ll_wallet=rootView!!.find(R.id.ll_wallet)
-        ll_card=rootView!!.find(R.id.ll_card)
+        ll_bill = rootView!!.find(R.id.ll_bill)
+        ll_wallet = rootView!!.find(R.id.ll_wallet)
+        ll_card = rootView!!.find(R.id.ll_card)
 
-        ll_team=rootView!!.find(R.id.ll_team)
-        ll_friend=rootView!!.find(R.id.ll_friend)
-        ll_invite=rootView!!.find(R.id.ll_invite)
-        ll_zone=rootView!!.find(R.id.ll_zone)
+        ll_team = rootView!!.find(R.id.ll_team)
+        ll_friend = rootView!!.find(R.id.ll_friend)
+        ll_invite = rootView!!.find(R.id.ll_invite)
+        ll_zone = rootView!!.find(R.id.ll_zone)
 
-        bt_login= rootView!!.find(R.id.email_sign_in_button)
-        weixin_login= rootView!!.find(R.id.weixin_login)
-        vs_content= rootView!!.find(R.id.vs_content)
-        bt_logout=rootView!!.find(R.id.bt_logout)
-        if(!MyApplication.isLogin){
+        bt_login = rootView!!.find(R.id.email_sign_in_button)
+        weixin_login = rootView!!.find(R.id.weixin_login)
+        vs_content = rootView!!.find(R.id.vs_content)
+        bt_logout = rootView!!.find(R.id.bt_logout)
+        if (!MyApplication.isLogin) {
             vs_content.showNext()
-            Log.i("mpf","me showNext")
-        }else{
+            Log.i("mpf", "me showNext")
+        } else {
             refreshView()
-            Log.i("mpf","me refreshView")
+            Log.i("mpf", "me refreshView")
         }
 
-        et_username=rootView!!.find(R.id.username)
-        et_password=rootView!!.find(R.id.password)
+        et_username = rootView!!.find(R.id.username)
+        et_password = rootView!!.find(R.id.password)
 
 
 
@@ -171,38 +171,38 @@ class MeFragment : BaseFragment() {
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        ib_message_toolbar.setOnClickListener{startActivity(Intent(activity,MessageActivity::class.java))}
-        ib_avatar.setOnClickListener { toast("头像设置")  }
-        ib_setting.setOnClickListener { startActivity(Intent(activity,SettingActivity::class.java))}
-        ib_mobile.setOnClickListener{startActivity(Intent(activity,MobileActivity::class.java))}
+        ib_message_toolbar.setOnClickListener { startActivity(Intent(activity, MessageActivity::class.java)) }
+        ib_avatar.setOnClickListener { toast("头像设置") }
+        ib_setting.setOnClickListener { startActivity(Intent(activity, SettingActivity::class.java)) }
+        ib_mobile.setOnClickListener { startActivity(Intent(activity, MobileActivity::class.java)) }
 //        tv_focus.setOnClickListener{toast("关注")}
 //        tv_fans.setOnClickListener{toast("粉丝")}
 //        tv_favorite.setOnClickListener { toast("收集") }
 
         ll_upgrade.setOnClickListener { startActivity(Intent(activity, UpgradeActivity::class.java)) }
-        ll_order.setOnClickListener{startActivity(Intent(activity,OrderActivity::class.java))}
-        ll_cart.setOnClickListener{toast("购物车")}
-        ll_surround.setOnClickListener{toast("周边")}
-        ll_shop.setOnClickListener{toast("开店")}
+        ll_order.setOnClickListener { startActivity(Intent(activity, OrderActivity::class.java)) }
+        ll_cart.setOnClickListener { toast("购物车") }
+        ll_surround.setOnClickListener { toast("周边") }
+        ll_shop.setOnClickListener { toast("开店") }
 
-        ll_bill.setOnClickListener{toast("账单")}
-        ll_wallet.setOnClickListener{toast("钱包")}
-        ll_card.setOnClickListener{toast("银行卡")}
+        ll_bill.setOnClickListener { toast("账单") }
+        ll_wallet.setOnClickListener { toast("钱包") }
+        ll_card.setOnClickListener { toast("银行卡") }
 
-        ll_team.setOnClickListener{toast("团队")}
-        ll_friend.setOnClickListener{toast("好友")}
-        ll_invite.setOnClickListener{startActivity(Intent(activity,QrcodeActivity::class.java))}
-        ll_zone.setOnClickListener{toast("地区")}
+        ll_team.setOnClickListener { toast("团队") }
+        ll_friend.setOnClickListener { toast("好友") }
+        ll_invite.setOnClickListener { startActivity(Intent(activity, QrcodeActivity::class.java)) }
+        ll_zone.setOnClickListener { toast("地区") }
 
-        bt_login.setOnClickListener{
+        bt_login.setOnClickListener {
             login()
         }
-        weixin_login.setOnClickListener{
+        weixin_login.setOnClickListener {
             wxLogin()
         }
-        bt_logout.setOnClickListener{
+        bt_logout.setOnClickListener {
             (activity.application as MyApplication).logOut()
-            SharedPreferencesUtil(activity,"user").clear()
+            SharedPreferencesUtil(activity, "user").clear()
             vs_content.showNext()
 
 
@@ -210,32 +210,30 @@ class MeFragment : BaseFragment() {
     }
 
     private fun login() {
-        userName=et_username.text.toString()
-        passWord=et_password.text.toString()
-        if (userName==""||passWord==""){
+        userName = et_username.text.toString()
+        passWord = et_password.text.toString()
+        if (userName == "" || passWord == "") {
             toast("用户名或者密码不能为空")
             return
         }
-        val nowTime=CommonUtil.getCurrentTime()
-        val signStr = CommonUtil.getRealShaStr("time=" + nowTime,"txtUserName="+userName,"txtPassword="+passWord)
+        val nowTime = CommonUtil.getCurrentTime()
+        val signStr = CommonUtil.getRealShaStr("time=" + nowTime, "txtUserName=" + userName, "txtPassword=" + passWord)
         OkHttpUtils.post().url("http://www.cndownton.com/tools/app_api.ashx?action=user_login")
-                .addParams("txtUserName",userName)
-                .addParams("txtPassword",passWord)
-                .addParams("time",nowTime)
-                .addParams("sign",HMACSHA256.sha256_HMAC(activity,signStr))
+                .addParams("txtUserName", userName)
+                .addParams("txtPassword", passWord)
+                .addParams("time", nowTime)
+                .addParams("sign", HMACSHA256.sha256_HMAC(activity, signStr))
                 .build()
-                .execute(object :StringCallback(){
+                .execute(object : StringCallback() {
                     override fun onResponse(response: String?, id: Int) {
-                        val jsonO=JSONObject(response)
-                        if(jsonO.getInt("status")==0){
+                        val jsonO = JSONObject(response)
+                        if (jsonO.getInt("status") == 0) {
                             toast(jsonO.getString("msg"))
-                        }else if (jsonO.getInt("status")==1){
+                        } else if (jsonO.getInt("status") == 1) {
                             toast(jsonO.getString("msg"))
-                            SharedPreferencesUtil(activity,"user").put("userid",jsonO.getInt("user_id"))
-
+                            SharedPreferencesUtil(activity, "user").put("userid", jsonO.getInt("user_id"))
+                            getUserInfo()
                         }
-
-
                     }
 
                     override fun onError(call: Call?, e: Exception?, id: Int) {
@@ -243,6 +241,27 @@ class MeFragment : BaseFragment() {
                     }
 
                 })
+
+    }
+
+    private fun getUserInfo() {
+        val userId = SharedPreferencesUtil(activity, "user").getSharedPreference("userid", 0)
+        val nowTime = CommonUtil.getCurrentTime()
+        val signStr = CommonUtil.getRealShaStr("time=" + nowTime, "user_id=" + userId)
+        OkHttpUtils.post().url("http://www.cndownton.com/tools/app_api.ashx?action=get_user_info")
+                .addParams("time", nowTime)
+                .addParams("user_id", userId.toString())
+                .addParams("sign",HMACSHA256.sha256_HMAC(activity,signStr))
+                .build().execute(object :StringCallback(){
+            override fun onResponse(response: String?, id: Int) {
+                Log.i("mpf",response)
+            }
+
+            override fun onError(call: Call?, e: Exception?, id: Int) {
+                Toast.makeText(activity, e!!.message,Toast.LENGTH_LONG).show()
+            }
+
+        })
 
     }
 
@@ -267,50 +286,51 @@ class MeFragment : BaseFragment() {
         mListener = null
     }
 
-    fun wxLogin(){
+    fun wxLogin() {
         MyApplication.addActivity(activity as MainActivity)
-        if (!MyApplication.api.isWXAppInstalled){
+        if (!MyApplication.api.isWXAppInstalled) {
             toast("微信没有安装")
             return
         }
-        val req:SendAuth.Req=SendAuth.Req()
-        req.scope="snsapi_userinfo"
-        req.state="towndon_wx_login"
+        val req: SendAuth.Req = SendAuth.Req()
+        req.scope = "snsapi_userinfo"
+        req.state = "towndon_wx_login"
         MyApplication.api.sendReq(req)
     }
 
-    fun setView(index:Int){
-        when(index){
-            0->vs_content.showPrevious()
-            1->vs_content.showNext()
+    fun setView(index: Int) {
+        when (index) {
+            0 -> vs_content.showPrevious()
+            1 -> vs_content.showNext()
 
         }
     }
 
     @SuppressLint("WrongConstant")
-    fun refreshView(){
+    fun refreshView() {
         Glide.with(activity).load(MyApplication.user?.avatar).into(ib_avatar)
         tv_ID_score.setText("编号：${MyApplication.user?.user_name} 积分：${MyApplication.user?.point} 金豆：${MyApplication.user?.coin}")
         tv_nickname.setText(MyApplication.user?.nick_name)
 //        if(MyApplication.user?.mobile!=""){
 //            ib_mobile.visibility=View.GONE
 //        }
-        when(MyApplication.user?.group_id){
-            1->{
+        when (MyApplication.user?.group_id) {
+            1 -> {
 
             }
-            in 2..6->{
-                ib_star.image=resources.getDrawable(R.drawable.bg_star_repeat)
-                ib_star.scaleType=ImageView.ScaleType.FIT_XY
+            in 2..6 -> {
+                ib_star.image = resources.getDrawable(R.drawable.bg_star_repeat)
+                ib_star.scaleType = ImageView.ScaleType.FIT_XY
             }
-            in 7..11->{
-                ib_star.image=resources.getDrawable(R.drawable.bg_moon_repeat)
-                ib_star.scaleType=ImageView.ScaleType.FIT_XY
+            in 7..11 -> {
+                ib_star.image = resources.getDrawable(R.drawable.bg_moon_repeat)
+                ib_star.scaleType = ImageView.ScaleType.FIT_XY
 
             }
 
         }
     }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -327,8 +347,8 @@ class MeFragment : BaseFragment() {
 
     companion object {
 
-        val MEFRAGMENT_FIRSTVIEW:Int=0
-        val MEFRAGMENT_SECONDTVIEW:Int=1
+        val MEFRAGMENT_FIRSTVIEW: Int = 0
+        val MEFRAGMENT_SECONDTVIEW: Int = 1
 
 
         // TODO: Rename parameter arguments, choose names that match

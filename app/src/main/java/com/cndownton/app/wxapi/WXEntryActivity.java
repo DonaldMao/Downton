@@ -114,7 +114,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
                                         JSONObject object = null;
                                         try {
                                             object=new JSONObject(response);
-                                            if(object.getInt("status")!=0){
+                                            if(object.getInt("status")==0){
                                                 //新用户
                                                     AlertDialog.Builder builder=new AlertDialog.Builder(WXEntryActivity.this);
                                                     builder.setTitle("推荐人")
@@ -239,7 +239,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
     
                             @Override
                             public void onResponse(String response, int id) {
-                                Toast.makeText(WXEntryActivity.this,"4"+response,Toast.LENGTH_LONG).show();
+//                                Toast.makeText(WXEntryActivity.this,"4"+response,Toast.LENGTH_LONG).show();
     
                                 try {
                                     JSONObject object = new JSONObject(response);
