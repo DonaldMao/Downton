@@ -53,10 +53,10 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wxentry);
+//        setContentView(R.layout.activity_wxentry);
         MyApplication.api.handleIntent(getIntent(),this);
 //        mView=findViewById(R.id.tv);
-        et_wx=findViewById(R.id.et_wx);
+//        et_wx=findViewById(R.id.et_wx);
     }
 
     @Override
@@ -69,10 +69,9 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
             case BaseResp.ErrCode.ERR_AUTH_DENIED:
             case BaseResp.ErrCode.ERR_USER_CANCEL:
                 Toast.makeText(this,"登录失败",Toast.LENGTH_LONG).show();
-
                 break;
             case BaseResp.ErrCode.ERR_OK:
-                Toast.makeText(this,"登录成功",Toast.LENGTH_LONG).show();
+//                Toast.makeText(this,"登录成功",Toast.LENGTH_LONG).show();
                 String url="https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx5269ea51c51983b1&" +
                         "secret=14619a7548b2f56fdc3c20cf52d01a36&code="+((SendAuth.Resp)baseResp).code+"&grant_type=authorization_code";
                 OkHttpUtils.get().url(url).build().execute(new StringCallback() {
@@ -116,7 +115,8 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
                                             object=new JSONObject(response);
                                             if(object.getInt("status")==0){
                                                 //新用户
-                                                    AlertDialog.Builder builder=new AlertDialog.Builder(WXEntryActivity.this);
+                                                Toast.makeText(WXEntryActivity.this,"您是新用户",Toast.LENGTH_LONG).show();
+                                                AlertDialog.Builder builder=new AlertDialog.Builder(WXEntryActivity.this);
                                                     builder.setTitle("推荐人")
                                                             .setMessage("未发现推荐人信息，是否马上扫描推荐人二维码")
                                                             .setCancelable(false)
@@ -141,8 +141,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
                                                 application.logIn(info);
                                                 MyApplication.Companion.setNeedFreshMeFrag(true);
                                                 WXEntryActivity.this.finish();
-                                            
-                                            
+
                                             }
                                         } catch (final Exception e) {
                                             runOnUiThread(new Runnable() {

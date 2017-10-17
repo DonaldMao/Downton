@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mIntent: Intent
 
-//    private lateinit var mProgress:ProgressDialog
+    //    private lateinit var mProgress:ProgressDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -176,12 +176,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private var nowTimeMills=0L
     override fun onBackPressed() {
-        if(!(mFragments[vp_main.currentItem] as BaseFragment).onBackPressed()){
-            Log.i("mpf","back")
-            return}
+        if (!(mFragments[vp_main.currentItem] as BaseFragment).onBackPressed()) {
+            Log.i("mpf", "back")
+            return
+        }else if(System.currentTimeMillis()-nowTimeMills>2000){
+            nowTimeMills=System.currentTimeMillis()
+            toast("再按一次退出DT云商")
+            return
+        }
         super.onBackPressed()
     }
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         MainActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults)
@@ -219,7 +226,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkUpdate() {
-        mCheckUrl="http://www.cndownton.com/tools/app_unsign.ashx?action=get_app_version_info"
+        mCheckUrl = "http://www.cndownton.com/tools/app_unsign.ashx?action=get_app_version_info"
         UpdateManager.setDebuggable(true)
         UpdateManager.setWifiOnly(false)
         UpdateManager.setUrl(mCheckUrl, "main")
@@ -232,23 +239,52 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
     override fun onResume() {
         log("resume")
         super.onResume()
         val data = SharedPreferencesUtil(this, "user")
 
-        if (!MyApplication.isLogin && data.contain("unionid")) {
+        if (!MyApplication.isLogin && (data.contain("unionid") || data.contain("userid"))) {
 //            toast("unionid")
-            log("resume login ${MyApplication.isLogin}   ${data.contain("unionid")}")
-            loginUser(data.getSharedPreference("unionid","") as String)
+            if (data.contain("unionid")) {
+                log("resume login ${MyApplication.isLogin}   ${data.contain("unionid")}")
+                loginUser(data.getSharedPreference("unionid", "") as String)
+            }else{
+                loginUserById(data.getSharedPreference("userid",0) as Int)
+            }
+
 
         } else if (MyApplication.needFreshMeFrag) {
+
             (mFragments[3] as MeFragment).setView(MeFragment.MEFRAGMENT_FIRSTVIEW)
             MyApplication.needFreshMeFrag = false
             (mFragments[3] as MeFragment).refreshView()
         }
 
+    }
+
+    private fun loginUserById(userid:Int) {
+        val nowTime = CommonUtil.getCurrentTime()
+        val signStr = CommonUtil.getRealShaStr("time=" + nowTime, "user_id=" + userid)
+        OkHttpUtils.post().url("http://www.cndownton.com/tools/app_api.ashx?action=get_user_info")
+                .addParams("time", nowTime)
+                .addParams("user_id", userid.toString())
+                .addParams("sign",HMACSHA256.sha256_HMAC(this,signStr))
+                .build().execute(object :StringCallback(){
+            override fun onResponse(response: String?, id: Int) {
+                log(response!!)
+                val mObject = JSONObject(response)
+                val info = JsonUitl.stringToObject(mObject.getString("msg"), UserInfo::class.java) as UserInfo
+                val application = application as MyApplication
+                application.logIn(info)
+
+            }
+
+            override fun onError(call: Call?, e: java.lang.Exception?, id: Int) {
+                log(e!!.message!!)
+            }
+
+        })
     }
 
     override fun onPause() {
@@ -261,19 +297,20 @@ class MainActivity : AppCompatActivity() {
         super.onStop()
     }
 
-    private fun loginUser(unionid:String) {
+    private fun loginUser(unionid: String) {
         nowTime = CommonUtil.getCurrentTime()
         signStr = CommonUtil.getRealShaStr("time=" + nowTime, "unionid=" + unionid)
 
         OkHttpUtils.post().url("http://www.cndownton.com/tools/app_api.ashx?action=user_login_weixin_unionid")
-                .addParams("time",nowTime).addParams("unionid",unionid).addParams("sign", HMACSHA256.sha256_HMAC(this, signStr!!))
+                .addParams("time", nowTime).addParams("unionid", unionid).addParams("sign", HMACSHA256.sha256_HMAC(this, signStr!!))
 
                 .build().execute(object : StringCallback() {
             override fun onError(call: Call, e: Exception, id: Int) {
-                 Log.i("mpf",e.message)
+                Log.i("mpf", e.message)
             }
+
             override fun onResponse(response: String, id: Int) {
-                Log.i("mpf",response)
+                Log.i("mpf", response)
 
                 try {
                     val mObject = JSONObject(response)

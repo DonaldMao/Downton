@@ -1,47 +1,54 @@
 <ViewSwitcher
-    android:id="@+id/vs_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="#cecece"
-              android:orientation="vertical"
-              tools:context="com.cndownton.app.downton.main.me.MeFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/vs_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#cecece"
+    android:orientation="vertical"
+    tools:context="com.cndownton.app.downton.main.me.MeFragment">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
         >
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
+
             >
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:orientation="horizontal"
                 android:background="@color/colorPrimary"
+                android:orientation="horizontal"
                 >
+
                 <TextView
+                    android:id="@+id/textView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="个人中心"
-                    android:layout_gravity="center"
-                    android:textSize="24sp"
-                    android:textColor="@color/white"
-                    android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
-                    android:id="@+id/textView5"/>
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:text="个人中心"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"/>
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="192dp"
                 android:background="@drawable/user_center_avatar_background"
                 android:elevation="8dp"
                 >
+
                 <ImageButton
                     android:id="@+id/ib_mobile"
                     android:layout_width="24dp"
@@ -64,8 +71,8 @@
                     android:layout_marginTop="16dp"
                     android:background="@android:color/transparent"
                     android:scaleType="fitXY"
-                    android:visibility="invisible"
-                    android:src="@drawable/user_center_setting"/>
+                    android:src="@drawable/user_center_setting"
+                    android:visibility="invisible"/>
 
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/ib_avatar"
@@ -75,8 +82,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="16dp"
                     android:scaleType="fitCenter"
-                    app:riv_corner_radius="32dp"
-                    android:src="@drawable/user_center_avatar"/>
+                    android:src="@drawable/user_center_avatar"
+                    app:riv_corner_radius="32dp"/>
 
                 <ImageButton
                     android:id="@+id/ib_star"
@@ -86,8 +93,9 @@
                     android:layout_centerHorizontal="true"
                     android:background="@android:color/transparent"
                     android:scaleType="centerInside"
-                    android:tint="@color/orange"
-                    android:src="@android:drawable/star_off"/>
+                    android:src="@android:drawable/star_off"
+                    android:tint="@color/orange"/>
+
                 <TextView
                     android:id="@+id/tv_nickname"
                     android:layout_width="match_parent"
@@ -115,12 +123,12 @@
                     android:id="@+id/tv_focus"
                     android:layout_width="40dp"
                     android:layout_height="24dp"
+                    android:layout_alignParentBottom="true"
                     android:layout_marginEnd="48dp"
+                    android:layout_toStartOf="@+id/ib_avatar"
                     android:text="关注"
                     android:textColor="#aaffffff"
-                    android:textSize="16sp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_toStartOf="@+id/ib_avatar"/>
+                    android:textSize="16sp"/>
 
                 <TextView
                     android:id="@+id/tv_fans"
@@ -163,6 +171,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 >
+
                 <LinearLayout
                     android:id="@+id/ll_upgrade"
                     android:layout_width="match_parent"
@@ -180,11 +189,11 @@
                         />
 
                     <TextView
+                        style="@style/font_user_center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="8dp"
-                        style="@style/font_user_center"
                         android:text="我要升级"
                         />
 
@@ -209,6 +218,7 @@
                     android:layout_height="1dp"
                     android:background="#cecece"
                     />
+
                 <LinearLayout
                     android:id="@+id/ll_order"
                     android:layout_width="match_parent"
@@ -227,11 +237,11 @@
                         />
 
                     <TextView
+                        style="@style/font_user_center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="8dp"
-                        style="@style/font_user_center"
                         android:text="我的订单"
                         />
 
@@ -285,11 +295,11 @@
                         />
 
                     <TextView
+                        style="@style/font_user_center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="8dp"
-                        style="@style/font_user_center"
                         android:text="我的购物车"
                         />
 
@@ -297,11 +307,9 @@
                         android:id="@+id/badgeview_container"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
                         />
-
-
 
 
                     <ImageView
@@ -340,11 +348,11 @@
                         />
 
                     <TextView
+                        style="@style/font_user_center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="8dp"
-                        style="@style/font_user_center"
                         android:text="我的周边"
                         />
 
@@ -353,7 +361,6 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         />
-
 
 
                     <ImageView
@@ -393,12 +400,12 @@
                         />
 
                     <TextView
+                        style="@style/font_user_center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="8dp"
                         android:text="我要开店"
-                        style="@style/font_user_center"
                         />
 
                     <View
@@ -406,7 +413,6 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         />
-
 
 
                     <ImageView
@@ -437,12 +443,12 @@
                         />
 
                     <TextView
+                        style="@style/font_user_center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="8dp"
                         android:text="我的账单"
-                        style="@style/font_user_center"
                         />
 
                     <View
@@ -450,7 +456,6 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         />
-
 
 
                     <ImageView
@@ -489,12 +494,12 @@
                         />
 
                     <TextView
+                        style="@style/font_user_center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="8dp"
                         android:text="我的钱包"
-                        style="@style/font_user_center"
                         />
 
                     <View
@@ -502,7 +507,6 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         />
-
 
 
                     <ImageView
@@ -513,6 +517,7 @@
                         android:src="@drawable/user_center_arrow"
                         />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -525,9 +530,9 @@
                     android:id="@+id/ll_card"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
+                    android:layout_marginBottom="16dp"
                     android:background="@android:color/white"
                     android:orientation="horizontal"
-                    android:layout_marginBottom="16dp"
                     android:visibility="gone"
 
                     >
@@ -541,12 +546,12 @@
                         />
 
                     <TextView
+                        style="@style/font_user_center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="8dp"
                         android:text="我的银行卡"
-                        style="@style/font_user_center"
                         />
 
                     <View
@@ -554,7 +559,6 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         />
-
 
 
                     <ImageView
@@ -593,12 +597,12 @@
                         />
 
                     <TextView
+                        style="@style/font_user_center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="8dp"
                         android:text="我的团队"
-                        style="@style/font_user_center"
                         />
 
                     <View
@@ -606,7 +610,6 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         />
-
 
 
                     <ImageView
@@ -617,6 +620,7 @@
                         android:src="@drawable/user_center_arrow"
                         />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -644,12 +648,12 @@
                         />
 
                     <TextView
+                        style="@style/font_user_center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="8dp"
                         android:text="我的好友"
-                        style="@style/font_user_center"
                         />
 
                     <View
@@ -657,7 +661,6 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         />
-
 
 
                     <ImageView
@@ -668,6 +671,7 @@
                         android:src="@drawable/user_center_arrow"
                         />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -693,12 +697,12 @@
                         />
 
                     <TextView
+                        style="@style/font_user_center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="8dp"
                         android:text="我的二维码"
-                        style="@style/font_user_center"
                         />
 
                     <View
@@ -710,9 +714,9 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/user_center_list_qrcode"
                         android:layout_gravity="center_vertical"
                         android:layout_marginEnd="8dp"
+                        android:src="@drawable/user_center_list_qrcode"
                         />
 
                     <ImageView
@@ -723,6 +727,7 @@
                         android:src="@drawable/user_center_arrow"
                         />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -748,12 +753,12 @@
                         />
 
                     <TextView
+                        style="@style/font_user_center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="8dp"
                         android:text="我代理的地区"
-                        style="@style/font_user_center"
                         />
 
                     <View
@@ -761,7 +766,6 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         />
-
 
 
                     <ImageView
@@ -774,8 +778,8 @@
                 </LinearLayout>
 
 
-
             </LinearLayout>
+
             <Button
                 android:id="@+id/bt_logout"
                 style="?android:textAppearanceSmall"
@@ -784,45 +788,49 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
+                android:background="@drawable/bg_button_confirm"
                 android:text="退出当前账号"
                 android:textColor="@color/white"
-                android:background="@drawable/bg_button_confirm"
                 android:textSize="24sp"/>
 
         </LinearLayout>
     </ScrollView>
+
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
         >
+
         <RelativeLayout
+            android:id="@+id/toolbar_login"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:orientation="horizontal"
             android:background="@color/colorPrimary"
-            android:id="@+id/toolbar_login"
+            android:orientation="horizontal"
             >
+
             <TextView
+                android:id="@+id/tv_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="登录"
-                android:layout_gravity="center"
-                android:textSize="24sp"
-                android:textColor="@color/white"
-                android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                android:id="@+id/tv_login"/>
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:text="登录"
+                android:textColor="@color/white"
+                android:textSize="24sp"/>
+
             <ImageButton
                 android:layout_width="24dp"
                 android:layout_height="32dp"
-                android:visibility="gone"
-                android:src="@drawable/user_center_message"
-                android:background="@android:color/transparent"
-                android:layout_marginEnd="20dp"
-                android:scaleType="fitXY"
+                android:layout_alignParentEnd="true"
                 android:layout_alignTop="@id/tv_login"
-                android:layout_alignParentEnd="true"/>
+                android:layout_marginEnd="20dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:src="@drawable/user_center_message"
+                android:visibility="gone"/>
         </RelativeLayout>
 
         <ImageView
@@ -855,7 +863,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="请输入用户名"
-                android:inputType="textEmailAddress"
+                android:inputType="text"
                 android:maxLines="1"
                 android:singleLine="true"/>
 
@@ -894,9 +902,9 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
+            android:background="@drawable/bg_button_confirm"
             android:text="登  录"
             android:textColor="@color/white"
-            android:background="@drawable/bg_button_confirm"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

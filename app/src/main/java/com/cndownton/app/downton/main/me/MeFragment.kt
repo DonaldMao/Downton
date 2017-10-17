@@ -23,9 +23,11 @@ import com.cndownton.app.downton.customer.order.OrderActivity
 import com.cndownton.app.downton.customer.qrcode.QrcodeActivity
 import com.cndownton.app.downton.customer.setting.SettingActivity
 import com.cndownton.app.downton.customer.upgrade.UpgradeActivity
+import com.cndownton.app.downton.data.bean.UserInfo
 import com.cndownton.app.downton.main.MainActivity
 import com.cndownton.app.downton.util.CommonUtil
 import com.cndownton.app.downton.util.HMACSHA256
+import com.cndownton.app.downton.util.JsonUitl
 import com.cndownton.app.downton.util.SharedPreferencesUtil
 import com.makeramen.roundedimageview.RoundedImageView
 import com.tencent.mm.opensdk.modelmsg.SendAuth
@@ -255,6 +257,16 @@ class MeFragment : BaseFragment() {
                 .build().execute(object :StringCallback(){
             override fun onResponse(response: String?, id: Int) {
                 Log.i("mpf",response)
+                val jsonObject=JSONObject(response)
+                if (jsonObject.getInt("status")==1){
+                    val info = JsonUitl.stringToObject(jsonObject.getString("msg"), UserInfo::class.java) as UserInfo
+                    (activity.application as MyApplication).logIn(info)
+                    setView(MEFRAGMENT_FIRSTVIEW)
+                    refreshView()
+
+                }else{
+                    Toast.makeText(activity,jsonObject.getString("msg"),Toast.LENGTH_SHORT).show()
+                }
             }
 
             override fun onError(call: Call?, e: Exception?, id: Int) {
